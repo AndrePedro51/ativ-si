@@ -1,0 +1,103 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.menu{
+    min-height: 50px;
+    width: 100vw;
+    background-color: #001550;
+}
+.menu img{
+    padding: 1%;
+    width: 3%;
+    min-width: 30px;
+    margin-right: 3%;
+    margin-top: 5px;
+}
+.center{
+    margin: auto;
+    max-width: 1200px;
+    width: 80vw;
+}
+.img-home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.img-home img{
+    width: 32vw;
+}
+
+.img-home-text h1{
+    color: white;
+    font-weight: bold;
+    font-size: 2.8vw;
+    margin-bottom: 50px;
+}
+.img-home-text button{
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 1vw 3vw;
+    font-weight: bold;
+    font-size: 20pt;
+    color: #001550;
+}
+.button{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 50px;
+}
+.charts{
+    text-align: center;
+    margin-top: 12%;
+    width: 55%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-between;
+
+}
+.charts img{
+    margin-top: 10%;
+    width: 150px;
+}
+.charts button{
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 20px 50px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    background-color: #001550;
+}
+.import{
+    align-self: flex-end;
+}
+
+.equipe{
+    margin-top: 12%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-evenly;
+    
+}
+.equipe-item{
+    margin-top: 2%;
+    border-radius: 10px;
+    width: 250px;
+    height: 350px;
+    background-color: #001550;
+}
+
+.seta-voltar{
+    margin-top: 2%;
+}
+.seta-voltar img{ 
+    width: 40px;
+}
