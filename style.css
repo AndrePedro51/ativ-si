@@ -22,6 +22,7 @@
     width: 80vw;
 }
 .img-home{
+    height: 80vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,7 +34,7 @@
 .img-home-text h1{
     color: white;
     font-weight: bold;
-    font-size: 2.8vw;
+    font-size: 35px;
     margin-bottom: 50px;
 }
 .img-home-text button{
@@ -57,7 +58,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content:space-evenly;
 
 }
 .charts img{
@@ -100,4 +101,22 @@
 }
 .seta-voltar img{ 
     width: 40px;
+}
+@media (max-width: 900px){
+    .img-home img{
+        display: none;
+    }
+    .charts img{
+        width: 100px;
+        margin-top: 15%;
+    }
+    .charts button{
+        font-size: 15px;
+    }
+    
+}
+@media (max-width: 1250px){
+    .equipe{
+        width: 50vw;
+    }
 }
