@@ -98,9 +98,22 @@
 
 .seta-voltar{
     margin-top: 2%;
+    display: flex;
+}
+.seta-voltar h1{
+    margin-left: 40%;
+    font-weight: bold;
+    color: #001550;
 }
 .seta-voltar img{ 
     width: 40px;
+}
+.grafico{
+    width: 48%;
+    margin-bottom: 40px;
+}
+.panel-group{
+    margin-top: 40px;
 }
 @media (max-width: 900px){
     .img-home img{
@@ -112,6 +125,10 @@
     }
     .charts button{
         font-size: 15px;
+    }
+    .grafico{
+        width: 80%;
+        margin-bottom: 40px;
     }
     
 }

@@ -8,20 +8,1819 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Home</title>
 </head>
-<body;">
-    <div class="menu">
-        <div class="center">
-            <a href="index.html"><img src="img/home2x.png" alt=""></a>
-            <a href="#"><img src="img/chartsch2x.png" alt=""></a>
-            <a href="about.html"><img src="img/about2x.png" alt=""></a>
-        </div>
-    </div>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <div class="center seta-voltar">
         <a href="charts.html"><img src="img/arrow2x.png" alt=""></a>
+        <h1>Resultados</h1>
     </div>
+    <div class="panel-group center" id="accordion">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a style="text-decoration: none;" data-toggle="collapse" data-parent="#accordion"
+                        href="#info_pessoal">Informações Pessoais</a>
+                </h4>
+            </div>
+            <div id="info_pessoal" class="panel-collapse collapse" >
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="curso"></canvas>
+                        <canvas id="periodo" style="margin-left: 30px"></canvas>
+                    </div>
+                </div>
     
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="estado"></canvas>
+                        <canvas id="cidade" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="genero"></canvas>
+                        <canvas id="idade" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="estado_civil"></canvas>
+                        <canvas id="especial" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="deficiencia"></canvas>
+                        <canvas id="filhos" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="mora"></canvas>
+                        <canvas id="domicilio" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="situacao"></canvas>
+                        <canvas id="tempo" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a style="text-decoration: none;" data-toggle="collapse" data-parent="#accordion"
+                        href="#info_domicilio">Informações Domiciliares</a>
+                </h4>
+            </div>
+            <div id="info_domicilio" class="panel-collapse collapse">
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="renda"></canvas>
+                        <canvas id="geladeira" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="telefone"></canvas>
+                        <canvas id="microondas" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="notebook"></canvas>
+                        <canvas id="lavar" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="moto"></canvas>
+                        <canvas id="carro" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="dvd"></canvas>
+                        <canvas id="tv" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="celular"></canvas>  
+                        <canvas id="domicilio_tem" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#info_trabalho">Informações Trabalhistas</a>
+                </h4>
+            </div>
+            <div id="info_trabalho" class="panel-collapse collapse">
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="trabalha"></canvas>
+                        <canvas id="vinculo" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="area"></canvas>
+                        <canvas id="horario" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="empresa"></canvas>
+                        <canvas id="plano_saude" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#info_escola">Informações Escolares</a>
+                </h4>
+            </div>
+            <div id="info_escola" class="panel-collapse collapse">
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="escola_pai"></canvas>
+                        <canvas id="escola_mae" style="margin-left: 30px;"></canvas>
+                    </div>
+                    
+                </div>
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="vida_escolar"></canvas>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#info_tec">Informações Tecnológicas</a>
+                </h4>
+            </div>
+            <div id="info_tec" class="panel-collapse collapse">
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="freq_micro" style="margin-left: 30px;"></canvas>
+                        <canvas id="onde_micro"></canvas>
+                    </div>
+                </div>
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="final_micro" style="margin-left: 30px;"></canvas>
+                        <canvas id="conhecimento_info"></canvas> 
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">   
+                        <canvas id="conhecimento_app" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#info_cultura">Informações Culturais</a>
+                </h4>
+            </div>
+            <div id="info_cultura" class="panel-collapse collapse">
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="conhecimento_idioma"></canvas>
+                        <canvas id="busca" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="jornal"></canvas>
+                        <canvas id="assuntos" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="livros"></canvas>
+                        <canvas id="generos" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="voluntario"></canvas>
+                        <canvas id="religiao" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="cultura"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#info_academ">Informações Acadêmicas</a>
+                </h4>
+            </div>
+            <div id="info_academ" class="panel-collapse collapse">
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="fatec" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="escolheu"></canvas>
+                        <canvas id="expect_curso" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="expect_formar"></canvas>
+                        <canvas id="estudou" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="grafico">
+                    <div style="display: flex; margin-left: 30px">
+                        <canvas id="curso_tec"></canvas>    
+                        <canvas id="transporte" style="margin-left: 30px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+
+        // function getRandomColor() {
+        //     var letters = '0123456789ABCDEF'.split('');
+        //     var color = '#';
+        //     for (var i = 0; i < 6; i++ ) {
+        //         color += letters[Math.floor(Math.random() * 16)];
+        //     }
+        //     return color;
+        // }
+
+        const curso = document.getElementById('curso').getContext('2d');
+        const chart_1 = new Chart(curso, {
+            type: "bar",
+            data: {
+                labels: ['ADS', 'GPI', 'Gestao de R.H', 'Dev. de Soft. Multi.'],
+                datasets: [
+                    {
+                        label: "Cursos",
+                        data: [50, 50, 80, 10, 0],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const periodo = document.getElementById('periodo').getContext('2d');
+        const chart_2 = new Chart(periodo, {
+            type: "pie",
+            data: {
+                labels: ['Matutino', 'Noturno'],
+                datasets: [
+                    {
+                        label: "Período",
+                        data: [50, 80],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const estado = document.getElementById('estado').getContext('2d');
+        const chart_3 = new Chart(estado, {
+            type: "horizontalBar",
+            data: {
+                labels: ['São Paulo', 'Minas Gerais'],
+                datasets: [
+                    {
+                        label: "Estado",
+                        data: [50, 80],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const cidade = document.getElementById('cidade').getContext('2d');
+        const chart_4 = new Chart(cidade, {
+            type: "horizontalBar",
+            data: {
+                labels: ['Franca', 'Barretos'],
+                datasets: [
+                    {
+                        label: "Cidade",
+                        data: [50, 80],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const genero = document.getElementById('genero').getContext('2d');
+        const chart_5 = new Chart(genero, {
+            type: "horizontalBar",
+            data: {
+                labels: ['Masculino', 'Feminino', 'H. transg', 'M. transg', 'H. trans', 'M. trans', 'Não sei', 'Prefiro N.R', 'Outro'],
+                datasets: [
+                    {
+                        label: "Gênero",
+                        data: [50, 80, 10, 4, 70, 65, 12, 85, 44],
+                        backgroundColor: "rgba(54, 162, 235, 0.2)",
+                        borderColor: "rgb(54, 162, 235)",
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const idade = document.getElementById('idade').getContext('2d');
+        const chart_6 = new Chart(idade, {
+            type: "bar",
+            data: {
+                labels: ['Entre 17 e 25 anos', 'Entre 26 e 40 anos', 'Acima de 40 anos'],
+                datasets: [
+                    {
+                        label: "Idade",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const estado_civil = document.getElementById('estado_civil').getContext('2d');
+        const chart_7 = new Chart(estado_civil, {
+            type: "bar",
+            data: {
+                labels: ['Solteiro(a)', 'Casado(a)', 'Separado(a)', 'Viúvo(a)'],
+                datasets: [
+                    {
+                        label: "Estado Civil",
+                        data: [50, 80, 10, 20],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const especial = document.getElementById('especial').getContext('2d');
+        const chart_8 = new Chart(especial, {
+            type: "bar",
+            data: {
+                labels: ['Nenhuma', 'Visual', 'Física', 'Auditiva', 'Autismo', 'De fala'],
+                datasets: [
+                    {
+                        label: "Necessidade Especial",
+                        data: [50, 80, 10, 20, 30, 75],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const deficiencia = document.getElementById('deficiencia').getContext('2d');
+        const chart_9 = new Chart(deficiencia, {
+            type: "bar",
+            data: {
+                labels: ['Autismo', 'S. de Down', 'Deficiência', 'Auditiva', 'Visual', 'De fala', 'Física', 'Não convivo'],
+                datasets: [
+                    {
+                        label: "Convivência com pessoas com deficiência",
+                        data: [50, 80, 10, 20, 30, 75, 15, 95],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const filhos = document.getElementById('filhos').getContext('2d');
+        const chart_10 = new Chart(filhos, {
+            type: "bar",
+            data: {
+                labels: ['Nenhum', 'Um', 'Dois', 'Três', 'Quatro', 'Mais de quatro'],
+                datasets: [
+                    {
+                        label: "Quantidade de filhos",
+                        data: [50, 80, 10, 20, 30, 75],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const mora = document.getElementById('mora').getContext('2d');
+        const chart_11 = new Chart(mora, {
+            type: "bar",
+            data: {
+                labels: ['Com os pais', 'Com esposa ou filho(s)', 'Com amigos', 'Sozinho'],
+                datasets: [
+                    {
+                        label: "Com quem mora atualmente",
+                        data: [50, 80, 10, 20],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const domicilio = document.getElementById('domicilio').getContext('2d');
+        const chart_12 = new Chart(domicilio, {
+            type: "bar",
+            data: {
+                labels: ['1 a 3 pessoas', '4 a 6 pessoas', 'Mais de 6 pessoas'],
+                datasets: [
+                    {
+                        label: "Quantidade de pessoas por domicílio",
+                        data: [50, 80, 10,],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const situacao = document.getElementById('situacao').getContext('2d');
+        const chart_13 = new Chart(situacao, {
+            type: "bar",
+            data: {
+                labels: ['Próprio', 'Alugado', 'Cedido', 'Financiado', 'Arrendado', 'Mensalista'],
+                datasets: [
+                    {
+                        label: "Situação Domicílio",
+                        data: [50, 80, 10, 20, 30, 40],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const tempo = document.getElementById('tempo').getContext('2d');
+        const chart_14 = new Chart(tempo, {
+            type: "bar",
+            data: {
+                labels: ['Entre 1 mês e 1 ano', 'Entre 1 ano e 4 anos', 'Mais de 4 anos'],
+                datasets: [
+                    {
+                        label: "Tempo de moradia",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const renda = document.getElementById('renda').getContext('2d');
+        const chart_15 = new Chart(renda, {
+            type: "bar",
+            data: {
+                labels: ['Até 2 Sal. Mín', 'Entre 2 e 5', 'Entre 6 e 10', 'Entre 11 e 20', 'Mais de 20', 'N/A'],
+                datasets: [
+                    {
+                        label: "Renda Mensal da família",
+                        data: [50, 80, 10, 20, 30, 40],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const geladeira = document.getElementById('geladeira').getContext('2d');
+        const chart_16 = new Chart(geladeira, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Geladeiras no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const telefone = document.getElementById('telefone').getContext('2d');
+        const chart_17 = new Chart(telefone, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Telefones no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const microondas = document.getElementById('microondas').getContext('2d');
+        const chart_18 = new Chart(microondas, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Micro-Ondas no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const notebook = document.getElementById('notebook').getContext('2d');
+        const chart_19 = new Chart(notebook, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Notebooks no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const lavar = document.getElementById('lavar').getContext('2d');
+        const chart_20 = new Chart(lavar, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Máquinas de lavar no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const moto = document.getElementById('moto').getContext('2d');
+        const chart_21 = new Chart(moto, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Motocicletas no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const carro = document.getElementById('carro').getContext('2d');
+        const chart_22 = new Chart(carro, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Carros no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const dvd = document.getElementById('dvd').getContext('2d');
+        const chart_23 = new Chart(dvd, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Vídeos cassete e(ou) DVD players no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const tv = document.getElementById('tv').getContext('2d');
+        const chart_24 = new Chart(tv, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Televisores no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const celular = document.getElementById('celular').getContext('2d');
+        const chart_25 = new Chart(celular, {
+            type: "bar",
+            data: {
+                labels: ['1', '2', 'Mais de 3'],
+                datasets: [
+                    {
+                        label: "Smartphones no domicilio",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const domicilio_tem = document.getElementById('domicilio_tem').getContext('2d');
+        const chart_26 = new Chart(domicilio_tem, {
+            type: "bar",
+            data: {
+                labels: ['Telefone fixo', 'Internet', 'Tv por assinatura', 'Empregada mensalista', 'Nenhum'],
+                datasets: [
+                    {
+                        label: "Tem no domicilio",
+                        data: [50, 80, 10, 20, 30],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const trabalha = document.getElementById('trabalha').getContext('2d');
+        const chart_27 = new Chart(trabalha, {
+            type: "bar",
+            data: {
+                labels: ['Trabalham', 'Não trabalham'],
+                datasets: [
+                    {
+                        label: "Pessoas que trabalham",
+                        data: [50, 80],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const vinculo = document.getElementById('vinculo').getContext('2d');
+        const chart_28 = new Chart(vinculo, {
+            type: "bar",
+            data: {
+                labels: ['Não trabalho', 'Registrado (Indústria)', 'Registrado (Comércio)', 'Pres.Serviço', 'Empresa Pública', 'Autônomo', 'Empresário', 'Estagiário'],
+                datasets: [
+                    {
+                        label: "Vínculo empregatício",
+                        data: [50, 80, 10, 20, 30, 40, 60, 70],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const area = document.getElementById('area').getContext('2d');
+        const chart_29 = new Chart(area, {
+            type: "bar",
+            data: {
+                labels: ['Não trabalho', 'Trabalho na área do curso', 'Trabalho fora da área do curso'],
+                datasets: [
+                    {
+                        label: "Área em que trabalha",
+                        data: [50, 80, 10],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const horario = document.getElementById('horario').getContext('2d');
+        const chart_30 = new Chart(horario, {
+            type: "bar",
+            data: {
+                labels: ['Não trabalho', 'Manhã', 'Tarde', 'Noite', 'Manhã e tarde', 'Manhã e noite', 'Tarde e noite', 'Regime e turnos'],
+                datasets: [
+                    {
+                        label: "Período de trabalho",
+                        data: [10, 20, 30, 40, 50, 60, 70, 65],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const empresa = document.getElementById('empresa').getContext('2d');
+        const chart_31 = new Chart(empresa, {
+            type: "bar",
+            data: {
+                labels: ['Magazine Luíza', 'Hard Franca', 'Empresa X'],
+                datasets: [
+                    {
+                        label: "Empresa em que trabalha",
+                        data: [10, 20, 30],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const plano_saude = document.getElementById('plano_saude').getContext('2d');
+        const chart_32 = new Chart(plano_saude, {
+            type: "bar",
+            data: {
+                labels: ['Não tenho', 'Tenho (Pago pela Empresa)', 'Tenho (Parcial. Pago pela Empresa)', 'Tenho (Plano Familiar)', 'Tenho (Individual)'],
+                datasets: [
+                    {
+                        label: "Plano de saúde",
+                        data: [10, 20, 30, 40, 50],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const escola_pai = document.getElementById('escola_pai').getContext('2d');
+        const chart_33 = new Chart(escola_pai, {
+            type: "horizontalBar",
+            data: {
+                labels: ['Nenhuma', '1º ao 5º anos', '6º ao 9º anos', 'Ensino Médio', 'Ensino Superior', 'Pós-graduação', 'Prefiro não responder'],
+                datasets: [
+                    {
+                        label: "Escolaridade Pai",
+                        data: [10, 20, 30, 40, 50, 60, 70],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const escola_mae = document.getElementById('escola_mae').getContext('2d');
+        const chart_34 = new Chart(escola_mae, {
+            type: "horizontalBar",
+            data: {
+                labels: ['Nenhuma', '1º ao 5º anos', '6º ao 9º anos', 'Ensino Médio', 'Ensino Superior', 'Pós-graduação', 'Prefiro não responder'],
+                datasets: [
+                    {
+                        label: "Escolaridade Mãe",
+                        data: [10, 20, 30, 40, 50, 60, 70],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const vida_escolar = document.getElementById('vida_escolar').getContext('2d');
+        const chart_35 = new Chart(vida_escolar, {
+            type: "horizontalBar",
+            data: {
+                labels: ['Sempre em escola pública', 'A maior parte em escola pública', 'Sempre em escola particular paga pela família', 'Sempre em escola particular com bolsa', 'A maior parte em escola particular paga pela família', 'A maior parte em escola particular com bolsa'],
+                datasets: [
+                    {
+                        label: "Vida Escolar",
+                        data: [10, 20, 30, 40, 50, 60],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const freq_micro = document.getElementById('freq_micro').getContext('2d');
+        const chart_36 = new Chart(freq_micro, {
+            type: "bar",
+            data: {
+                labels: ['Nunca', 'Pouco', 'Ás vezes', 'Muito', 'Sempre'],
+                datasets: [
+                    {
+                        label: "Frequência que usa microcomputadores",
+                        data: [10, 20, 30, 40],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const onde_micro = document.getElementById('onde_micro').getContext('2d');
+        const chart_37 = new Chart(onde_micro, {
+            type: "bar",
+            data: {
+                labels: ['Casa', 'Trabalho', 'Escola', 'Outros'],
+                datasets: [
+                    {
+                        label: "Onde usa microcomputadores",
+                        data: [10, 20, 30, 40],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const final_micro = document.getElementById('final_micro').getContext('2d');
+        const chart_38 = new Chart(final_micro, {
+            type: "bar",
+            data: {
+                labels: ['Trabalhos profissionais', 'Trabalhos escolares', 'Entretenimento', 'Comunicação', 'Op. Bancárias', 'Compras'],
+                datasets: [
+                    {
+                        label: "Finalidade que usa microcomputadores",
+                        data: [10, 20, 30, 40, 50, 60],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const conhecimento_info = document.getElementById('conhecimento_info').getContext('2d');
+        const chart_39 = new Chart(conhecimento_info, {
+            type: "bar",
+            data: {
+                labels: ['Nenhum', 'Pouco', 'Intermediário', 'Muito Avançado'],
+                datasets: [
+                    {
+                        label: "Conhecimento em informática",
+                        data: [10, 20, 30, 40],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const conhecimento_app = document.getElementById('conhecimento_app').getContext('2d');
+        const chart_40 = new Chart(conhecimento_app, {
+            type: "bar",
+            data: {
+                labels: ['Nenhum', 'Pouco', 'Intermediário', 'Muito Avançado'],
+                datasets: [
+                    {
+                        label: "Conhecimento com aplicativos",
+                        data: [10, 20, 30, 40],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const busca = document.getElementById('busca').getContext('2d');
+        const chart_41 = new Chart(busca, {
+            type: "bar",
+            data: {
+                labels: ['Nenhum', 'Pouco', 'Intermediário', 'Muito Avançado'],
+                datasets: [
+                    {
+                        label: "Informação por meio de comunicação",
+                        data: [10, 20, 30, 40],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const jornal = document.getElementById('jornal').getContext('2d');
+        const chart_42 = new Chart(jornal, {
+            type: "bar",
+            data: {
+                labels: ['Diariamente', 'Algumas vezes', 'Somente aos domingos', 'Raramente', 'Não leio'],
+                datasets: [
+                    {
+                        label: "Frequência que lê jornal",
+                        data: [10, 20, 30, 40, 50],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const assuntos = document.getElementById('assuntos').getContext('2d');
+        const chart_43 = new Chart(assuntos, {
+            type: "bar",
+            data: {
+                labels: ['Não leio', 'Todos os assuntos', 'Notícia locais', 'Notícias nacionais', 'Notícias internacionais', 'Esporte', 'Lazer, arte e cultura', 'Notícias policiais', 'Classificados', 'Moda', 'Sociais'],
+                datasets: [
+                    {
+                        label: "Assuntos que lê no jornal",
+                        data: [10, 20, 30, 40, 50, 55, 60, 70, 88, 100, 90],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const livros = document.getElementById('livros').getContext('2d');
+        const chart_44 = new Chart(livros, {
+            type: "bar",
+            data: {
+                labels: ['Nenhum', '2', 'Entre 3 e 6', 'Entre 7 e 10', 'Mais de 10'],
+                datasets: [
+                    {
+                        label: "Livros lidos por ano",
+                        data: [10, 20, 30, 40, 50],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const generos = document.getElementById('generos').getContext('2d');
+        const chart_45 = new Chart(generos, {
+            type: "bar",
+            data: {
+                labels: ['Não leio', 'Romance', 'Ficção', 'Policial', 'Biográfico', 'Aventura', 'Autoajuda', 'Outros'],
+                datasets: [
+                    {
+                        label: "Gêneros preferidos",
+                        data: [10, 20, 30, 40, 50, 60, 70, 80],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const voluntario = document.getElementById('voluntario').getContext('2d');
+        const chart_46 = new Chart(voluntario, {
+            type: "bar",
+            data: {
+                labels: ['Sim', 'Não'],
+                datasets: [
+                    {
+                        label: "Pratica atividades voluntárias",
+                        data: [10, 20],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const religiao = document.getElementById('religiao').getContext('2d');
+        const chart_47 = new Chart(religiao, {
+            type: "bar",
+            data: {
+                labels: ['Nenhuma', 'Católica', 'Espírita', 'Evangélica', 'Protestante', 'Outra'],
+                datasets: [
+                    {
+                        label: "Religiões",
+                        data: [10, 20, 30, 40, 50, 60],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const cultura = document.getElementById('cultura').getContext('2d');
+        const chart_48 = new Chart(cultura, {
+            type: "bar",
+            data: {
+                labels: ['Cinema', 'Exposições de arte', 'Filmes na internet', 'Literatura', 'Museus', 'Música', 'Teatro', 'TV', 'Viagens', 'Nenhuma'],
+                datasets: [
+                    {
+                        label: "Religiões",
+                        data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const fatec = document.getElementById('fatec').getContext('2d');
+        const chart_49 = new Chart(fatec, {
+            type: "bar",
+            data: {
+                labels: ['Cartaz de divulgação', 'Indicação', 'Facebook', 'Jornal', 'Rádio', 'Outdoor', 'Propagando'],
+                datasets: [
+                    {
+                        label: "Como conheceu a FATEC",
+                        data: [10, 20, 30, 40, 50, 60, 70],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const escolheu = document.getElementById('escolheu').getContext('2d');
+        const chart_50 = new Chart(escolheu, {
+            type: "bar",
+            data: {
+                labels: ['Mercado', 'Boa remuneração', 'Vocação', 'Curso gratuito', 'Duração', 'Curso conceituado', 'Trabalha na área', 'Sugestão', 'Outros'],
+                datasets: [
+                    {
+                        label: "Porque escolheu o curso",
+                        data: [10, 20, 30, 40, 50, 60, 70, 80, 90],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const expect_curso = document.getElementById('expect_curso').getContext('2d');
+        const chart_51 = new Chart(expect_curso, {
+            type: "bar",
+            data: {
+                labels: ['Novos conhecimentos', 'Obter competências', 'Conhecer novas pessoas', 'Melhorar-me como pessoa', 'Obter um diploma', 'Outra expectativa', 'Não tenho expectativa'],
+                datasets: [
+                    {
+                        label: "Expectativa quanto ao curso",
+                        data: [10, 20, 30, 40, 50, 60, 70],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const expect_formar = document.getElementById('expect_formar').getContext('2d');
+        const chart_52 = new Chart(expect_formar, {
+            type: "bar",
+            data: {
+                labels: ['Conquistar vaga', 'Prestar concurso', 'Melhorar cargo e salário', 'Abrir meu próprio negócio', 'Ingressar na carreira acadêmica', 'Outra expectativa', 'Não tenho expectativa'],
+                datasets: [
+                    {
+                        label: "Expectativa após se formar",
+                        data: [10, 20, 30, 40, 50, 60, 70],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const curso_tec = document.getElementById('curso_tec').getContext('2d');
+        const chart_53 = new Chart(curso_tec, {
+            type: "bar",
+            data: {
+                labels: ['Não fiz', 'Sim, em uma ETEC', 'Sim, no SENAC', 'Sim, no SENAI', 'Sim, em outra instituição'],
+                datasets: [
+                    {
+                        label: "Ja fez curso técnico",
+                        data: [10, 20, 30, 40, 50],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+        const transporte = document.getElementById('transporte').getContext('2d');
+        const chart_54 = new Chart(transporte, {
+            type: "bar",
+            data: {
+                labels: ['Caminhando', 'Carona', 'Bicicleta', 'Moto', 'Carro', 'Ônibus', 'Transporte escolar'],
+                datasets: [
+                    {
+                        label: "Meio de transporte",
+                        data: [10, 20, 30, 40, 50, 60, 70],
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        })
+
+    </script>
     
     
 </body>
