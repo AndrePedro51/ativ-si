@@ -298,7 +298,6 @@
     </div>
 
     <script>
-
         // function getRandomColor() {
         //     var letters = '0123456789ABCDEF'.split('');
         //     var color = '#';
@@ -310,13 +309,13 @@
 
         const curso = document.getElementById('curso').getContext('2d');
         const chart_1 = new Chart(curso, {
-            type: "bar",
+            type: "pie",
             data: {
-                labels: ['ADS', 'GPI', 'Gestao de R.H', 'Dev. de Soft. Multi.'],
+                labels: JSON.parse(sessionStorage.getItem("cursos"))[0],
                 datasets: [
                     {
                         label: "Cursos",
-                        data: [50, 50, 80, 10, 0],
+                        data: JSON.parse(sessionStorage.getItem("cursos"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
                         borderWidth: 1
@@ -340,11 +339,11 @@
         const chart_2 = new Chart(periodo, {
             type: "pie",
             data: {
-                labels: ['Matutino', 'Noturno'],
+                labels: JSON.parse(sessionStorage.getItem("periodos"))[0],
                 datasets: [
                     {
                         label: "Período",
-                        data: [50, 80],
+                        data: JSON.parse(sessionStorage.getItem("periodos"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -368,11 +367,11 @@
         const chart_3 = new Chart(estado, {
             type: "horizontalBar",
             data: {
-                labels: ['São Paulo', 'Minas Gerais'],
+                labels: JSON.parse(sessionStorage.getItem("estados"))[0],
                 datasets: [
                     {
                         label: "Estado",
-                        data: [50, 80],
+                        data: JSON.parse(sessionStorage.getItem("estados"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -396,11 +395,11 @@
         const chart_4 = new Chart(cidade, {
             type: "horizontalBar",
             data: {
-                labels: ['Franca', 'Barretos'],
+                labels: JSON.parse(sessionStorage.getItem("cidades"))[0],
                 datasets: [
                     {
                         label: "Cidade",
-                        data: [50, 80],
+                        data: JSON.parse(sessionStorage.getItem("cidades"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -424,11 +423,11 @@
         const chart_5 = new Chart(genero, {
             type: "horizontalBar",
             data: {
-                labels: ['Masculino', 'Feminino', 'H. transg', 'M. transg', 'H. trans', 'M. trans', 'Não sei', 'Prefiro N.R', 'Outro'],
+                labels: JSON.parse(sessionStorage.getItem("generos"))[0],
                 datasets: [
                     {
                         label: "Gênero",
-                        data: [50, 80, 10, 4, 70, 65, 12, 85, 44],
+                        data: JSON.parse(sessionStorage.getItem("generos"))[1],
                         backgroundColor: "rgba(54, 162, 235, 0.2)",
                         borderColor: "rgb(54, 162, 235)",
                         borderWidth: 1
@@ -452,11 +451,11 @@
         const chart_6 = new Chart(idade, {
             type: "bar",
             data: {
-                labels: ['Entre 17 e 25 anos', 'Entre 26 e 40 anos', 'Acima de 40 anos'],
+                labels: JSON.parse(sessionStorage.getItem("idades"))[0],
                 datasets: [
                     {
                         label: "Idade",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("idades"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -480,11 +479,11 @@
         const chart_7 = new Chart(estado_civil, {
             type: "bar",
             data: {
-                labels: ['Solteiro(a)', 'Casado(a)', 'Separado(a)', 'Viúvo(a)'],
+                labels: JSON.parse(sessionStorage.getItem("estado_civil"))[0],
                 datasets: [
                     {
                         label: "Estado Civil",
-                        data: [50, 80, 10, 20],
+                        data: JSON.parse(sessionStorage.getItem("estado_civil"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
                         borderWidth: 1
@@ -508,11 +507,11 @@
         const chart_8 = new Chart(especial, {
             type: "bar",
             data: {
-                labels: ['Nenhuma', 'Visual', 'Física', 'Auditiva', 'Autismo', 'De fala'],
+                labels: JSON.parse(sessionStorage.getItem("necessidades"))[0],
                 datasets: [
                     {
                         label: "Necessidade Especial",
-                        data: [50, 80, 10, 20, 30, 75],
+                        data: JSON.parse(sessionStorage.getItem("necessidades"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
                         borderWidth: 1
@@ -536,11 +535,11 @@
         const chart_9 = new Chart(deficiencia, {
             type: "bar",
             data: {
-                labels: ['Autismo', 'S. de Down', 'Deficiência', 'Auditiva', 'Visual', 'De fala', 'Física', 'Não convivo'],
+                labels: JSON.parse(sessionStorage.getItem("convive"))[0],
                 datasets: [
                     {
                         label: "Convivência com pessoas com deficiência",
-                        data: [50, 80, 10, 20, 30, 75, 15, 95],
+                        data: JSON.parse(sessionStorage.getItem("convive"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
                         borderWidth: 1
@@ -564,11 +563,11 @@
         const chart_10 = new Chart(filhos, {
             type: "bar",
             data: {
-                labels: ['Nenhum', 'Um', 'Dois', 'Três', 'Quatro', 'Mais de quatro'],
+                labels: JSON.parse(sessionStorage.getItem("filhos"))[0],
                 datasets: [
                     {
                         label: "Quantidade de filhos",
-                        data: [50, 80, 10, 20, 30, 75],
+                        data: JSON.parse(sessionStorage.getItem("filhos"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
                         borderWidth: 1
@@ -592,11 +591,11 @@
         const chart_11 = new Chart(mora, {
             type: "bar",
             data: {
-                labels: ['Com os pais', 'Com esposa ou filho(s)', 'Com amigos', 'Sozinho'],
+                labels: JSON.parse(sessionStorage.getItem("mora"))[0],
                 datasets: [
                     {
                         label: "Com quem mora atualmente",
-                        data: [50, 80, 10, 20],
+                        data: JSON.parse(sessionStorage.getItem("mora"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)", "rgba(75, 192, 192)"],
                         borderWidth: 1
@@ -620,11 +619,11 @@
         const chart_12 = new Chart(domicilio, {
             type: "bar",
             data: {
-                labels: ['1 a 3 pessoas', '4 a 6 pessoas', 'Mais de 6 pessoas'],
+                labels: JSON.parse(sessionStorage.getItem("domicilio"))[0],
                 datasets: [
                     {
                         label: "Quantidade de pessoas por domicílio",
-                        data: [50, 80, 10,],
+                        data: JSON.parse(sessionStorage.getItem("domicilio"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -648,11 +647,11 @@
         const chart_13 = new Chart(situacao, {
             type: "bar",
             data: {
-                labels: ['Próprio', 'Alugado', 'Cedido', 'Financiado', 'Arrendado', 'Mensalista'],
+                labels: JSON.parse(sessionStorage.getItem("situacao"))[0],
                 datasets: [
                     {
                         label: "Situação Domicílio",
-                        data: [50, 80, 10, 20, 30, 40],
+                        data: JSON.parse(sessionStorage.getItem("situacao"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -676,11 +675,11 @@
         const chart_14 = new Chart(tempo, {
             type: "bar",
             data: {
-                labels: ['Entre 1 mês e 1 ano', 'Entre 1 ano e 4 anos', 'Mais de 4 anos'],
+                labels: JSON.parse(sessionStorage.getItem("tempo"))[0],
                 datasets: [
                     {
                         label: "Tempo de moradia",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("tempo"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -704,11 +703,11 @@
         const chart_15 = new Chart(renda, {
             type: "bar",
             data: {
-                labels: ['Até 2 Sal. Mín', 'Entre 2 e 5', 'Entre 6 e 10', 'Entre 11 e 20', 'Mais de 20', 'N/A'],
+                labels: JSON.parse(sessionStorage.getItem("renda"))[0],
                 datasets: [
                     {
                         label: "Renda Mensal da família",
-                        data: [50, 80, 10, 20, 30, 40],
+                        data: JSON.parse(sessionStorage.getItem("renda"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -732,11 +731,11 @@
         const chart_16 = new Chart(geladeira, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("geladeiras"))[0],
                 datasets: [
                     {
                         label: "Geladeiras no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("geladeiras"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -760,11 +759,11 @@
         const chart_17 = new Chart(telefone, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("telefones"))[0],
                 datasets: [
                     {
                         label: "Telefones no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("telefones"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -788,11 +787,11 @@
         const chart_18 = new Chart(microondas, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("microondas"))[0],
                 datasets: [
                     {
                         label: "Micro-Ondas no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("microondas"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -816,11 +815,11 @@
         const chart_19 = new Chart(notebook, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("notebooks"))[0],
                 datasets: [
                     {
                         label: "Notebooks no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("notebooks"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -844,11 +843,11 @@
         const chart_20 = new Chart(lavar, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("lavar"))[0],
                 datasets: [
                     {
                         label: "Máquinas de lavar no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("lavar"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -872,11 +871,11 @@
         const chart_21 = new Chart(moto, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("motos"))[0],
                 datasets: [
                     {
                         label: "Motocicletas no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("motos"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -900,11 +899,11 @@
         const chart_22 = new Chart(carro, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("carros"))[0],
                 datasets: [
                     {
                         label: "Carros no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("carros"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -928,11 +927,11 @@
         const chart_23 = new Chart(dvd, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("dvds"))[0],
                 datasets: [
                     {
                         label: "Vídeos cassete e(ou) DVD players no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("dvds"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -956,11 +955,11 @@
         const chart_24 = new Chart(tv, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("tvs"))[0],
                 datasets: [
                     {
                         label: "Televisores no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("tvs"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -984,11 +983,11 @@
         const chart_25 = new Chart(celular, {
             type: "bar",
             data: {
-                labels: ['1', '2', 'Mais de 3'],
+                labels: JSON.parse(sessionStorage.getItem("celulares"))[0],
                 datasets: [
                     {
                         label: "Smartphones no domicilio",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("celulares"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1012,11 +1011,11 @@
         const chart_26 = new Chart(domicilio_tem, {
             type: "bar",
             data: {
-                labels: ['Telefone fixo', 'Internet', 'Tv por assinatura', 'Empregada mensalista', 'Nenhum'],
+                labels: JSON.parse(sessionStorage.getItem("domicilio_tem"))[0],
                 datasets: [
                     {
                         label: "Tem no domicilio",
-                        data: [50, 80, 10, 20, 30],
+                        data: JSON.parse(sessionStorage.getItem("domicilio_tem"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1040,11 +1039,11 @@
         const chart_27 = new Chart(trabalha, {
             type: "bar",
             data: {
-                labels: ['Trabalham', 'Não trabalham'],
+                labels: JSON.parse(sessionStorage.getItem("trabalha"))[0],
                 datasets: [
                     {
                         label: "Pessoas que trabalham",
-                        data: [50, 80],
+                        data: JSON.parse(sessionStorage.getItem("trabalha"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)"],
                         borderWidth: 1
@@ -1068,11 +1067,11 @@
         const chart_28 = new Chart(vinculo, {
             type: "bar",
             data: {
-                labels: ['Não trabalho', 'Registrado (Indústria)', 'Registrado (Comércio)', 'Pres.Serviço', 'Empresa Pública', 'Autônomo', 'Empresário', 'Estagiário'],
+                labels: JSON.parse(sessionStorage.getItem("vinculo"))[0],
                 datasets: [
                     {
                         label: "Vínculo empregatício",
-                        data: [50, 80, 10, 20, 30, 40, 60, 70],
+                        data: JSON.parse(sessionStorage.getItem("vinculo"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)"],
                         borderWidth: 1
@@ -1096,11 +1095,11 @@
         const chart_29 = new Chart(area, {
             type: "bar",
             data: {
-                labels: ['Não trabalho', 'Trabalho na área do curso', 'Trabalho fora da área do curso'],
+                labels: JSON.parse(sessionStorage.getItem("area"))[0],
                 datasets: [
                     {
                         label: "Área em que trabalha",
-                        data: [50, 80, 10],
+                        data: JSON.parse(sessionStorage.getItem("area"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1124,11 +1123,11 @@
         const chart_30 = new Chart(horario, {
             type: "bar",
             data: {
-                labels: ['Não trabalho', 'Manhã', 'Tarde', 'Noite', 'Manhã e tarde', 'Manhã e noite', 'Tarde e noite', 'Regime e turnos'],
+                labels: JSON.parse(sessionStorage.getItem("horario"))[0],
                 datasets: [
                     {
                         label: "Período de trabalho",
-                        data: [10, 20, 30, 40, 50, 60, 70, 65],
+                        data: JSON.parse(sessionStorage.getItem("horario"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1148,43 +1147,43 @@
             }
         })
 
-        const empresa = document.getElementById('empresa').getContext('2d');
-        const chart_31 = new Chart(empresa, {
-            type: "bar",
-            data: {
-                labels: ['Magazine Luíza', 'Hard Franca', 'Empresa X'],
-                datasets: [
-                    {
-                        label: "Empresa em que trabalha",
-                        data: [10, 20, 30],
-                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
-                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }
-                    ]
-                }
-            }
-        })
+        // const empresa = document.getElementById('empresa').getContext('2d');
+        // const chart_31 = new Chart(empresa, {
+        //     type: "bar",
+        //     data: {
+        //         labels: ['Magazine Luíza', 'Hard Franca', 'Empresa X'],
+        //         datasets: [
+        //             {
+        //                 label: "Empresa em que trabalha",
+        //                 data: [10, 20, 30],
+        //                 backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+        //                 borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+        //                 borderWidth: 1
+        //             },
+        //         ]
+        //     },
+        //     options: {
+        //         scales: {
+        //             yAxes: [
+        //                 {
+        //                     ticks: {
+        //                         beginAtZero: true
+        //                     }
+        //                 }
+        //             ]
+        //         }
+        //     }
+        // })
 
         const plano_saude = document.getElementById('plano_saude').getContext('2d');
         const chart_32 = new Chart(plano_saude, {
             type: "bar",
             data: {
-                labels: ['Não tenho', 'Tenho (Pago pela Empresa)', 'Tenho (Parcial. Pago pela Empresa)', 'Tenho (Plano Familiar)', 'Tenho (Individual)'],
+                labels: JSON.parse(sessionStorage.getItem("plano_saude"))[0],
                 datasets: [
                     {
                         label: "Plano de saúde",
-                        data: [10, 20, 30, 40, 50],
+                        data: JSON.parse(sessionStorage.getItem("plano_saude"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1208,11 +1207,11 @@
         const chart_33 = new Chart(escola_pai, {
             type: "horizontalBar",
             data: {
-                labels: ['Nenhuma', '1º ao 5º anos', '6º ao 9º anos', 'Ensino Médio', 'Ensino Superior', 'Pós-graduação', 'Prefiro não responder'],
+                labels: JSON.parse(sessionStorage.getItem("grau_pai"))[0],
                 datasets: [
                     {
                         label: "Escolaridade Pai",
-                        data: [10, 20, 30, 40, 50, 60, 70],
+                        data: JSON.parse(sessionStorage.getItem("grau_pai"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1236,11 +1235,11 @@
         const chart_34 = new Chart(escola_mae, {
             type: "horizontalBar",
             data: {
-                labels: ['Nenhuma', '1º ao 5º anos', '6º ao 9º anos', 'Ensino Médio', 'Ensino Superior', 'Pós-graduação', 'Prefiro não responder'],
+                labels: JSON.parse(sessionStorage.getItem("grau_mae"))[0],
                 datasets: [
                     {
                         label: "Escolaridade Mãe",
-                        data: [10, 20, 30, 40, 50, 60, 70],
+                        data: JSON.parse(sessionStorage.getItem("grau_mae"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1264,11 +1263,11 @@
         const chart_35 = new Chart(vida_escolar, {
             type: "horizontalBar",
             data: {
-                labels: ['Sempre em escola pública', 'A maior parte em escola pública', 'Sempre em escola particular paga pela família', 'Sempre em escola particular com bolsa', 'A maior parte em escola particular paga pela família', 'A maior parte em escola particular com bolsa'],
+                labels: JSON.parse(sessionStorage.getItem("vida_escolar"))[0],
                 datasets: [
                     {
                         label: "Vida Escolar",
-                        data: [10, 20, 30, 40, 50, 60],
+                        data: JSON.parse(sessionStorage.getItem("vida_escolar"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1292,11 +1291,11 @@
         const chart_36 = new Chart(freq_micro, {
             type: "bar",
             data: {
-                labels: ['Nunca', 'Pouco', 'Ás vezes', 'Muito', 'Sempre'],
+                labels: JSON.parse(sessionStorage.getItem("freq_micro"))[0],
                 datasets: [
                     {
                         label: "Frequência que usa microcomputadores",
-                        data: [10, 20, 30, 40],
+                        data: JSON.parse(sessionStorage.getItem("freq_micro"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1320,11 +1319,11 @@
         const chart_37 = new Chart(onde_micro, {
             type: "bar",
             data: {
-                labels: ['Casa', 'Trabalho', 'Escola', 'Outros'],
+                labels: JSON.parse(sessionStorage.getItem("onde_micro"))[0],
                 datasets: [
                     {
                         label: "Onde usa microcomputadores",
-                        data: [10, 20, 30, 40],
+                        data: JSON.parse(sessionStorage.getItem("onde_micro"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1348,11 +1347,11 @@
         const chart_38 = new Chart(final_micro, {
             type: "bar",
             data: {
-                labels: ['Trabalhos profissionais', 'Trabalhos escolares', 'Entretenimento', 'Comunicação', 'Op. Bancárias', 'Compras'],
+                labels: JSON.parse(sessionStorage.getItem("final_micro"))[0],
                 datasets: [
                     {
                         label: "Finalidade que usa microcomputadores",
-                        data: [10, 20, 30, 40, 50, 60],
+                        data: JSON.parse(sessionStorage.getItem("final_micro"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1376,11 +1375,11 @@
         const chart_39 = new Chart(conhecimento_info, {
             type: "bar",
             data: {
-                labels: ['Nenhum', 'Pouco', 'Intermediário', 'Muito Avançado'],
+                labels: JSON.parse(sessionStorage.getItem("conhecimento_info"))[0],
                 datasets: [
                     {
                         label: "Conhecimento em informática",
-                        data: [10, 20, 30, 40],
+                        data: JSON.parse(sessionStorage.getItem("conhecimento_info"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1400,71 +1399,71 @@
             }
         })
 
-        const conhecimento_app = document.getElementById('conhecimento_app').getContext('2d');
-        const chart_40 = new Chart(conhecimento_app, {
-            type: "bar",
-            data: {
-                labels: ['Nenhum', 'Pouco', 'Intermediário', 'Muito Avançado'],
-                datasets: [
-                    {
-                        label: "Conhecimento com aplicativos",
-                        data: [10, 20, 30, 40],
-                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
-                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }
-                    ]
-                }
-            }
-        })
+        // const conhecimento_app = document.getElementById('conhecimento_app').getContext('2d');
+        // const chart_40 = new Chart(conhecimento_app, {
+        //     type: "bar",
+        //     data: {
+        //         labels: ['Nenhum', 'Pouco', 'Intermediário', 'Muito Avançado'],
+        //         datasets: [
+        //             {
+        //                 label: "Conhecimento com aplicativos",
+        //                 data: [10, 20, 30, 40],
+        //                 backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+        //                 borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+        //                 borderWidth: 1
+        //             },
+        //         ]
+        //     },
+        //     options: {
+        //         scales: {
+        //             yAxes: [
+        //                 {
+        //                     ticks: {
+        //                         beginAtZero: true
+        //                     }
+        //                 }
+        //             ]
+        //         }
+        //     }
+        // })
 
-        const busca = document.getElementById('busca').getContext('2d');
-        const chart_41 = new Chart(busca, {
-            type: "bar",
-            data: {
-                labels: ['Nenhum', 'Pouco', 'Intermediário', 'Muito Avançado'],
-                datasets: [
-                    {
-                        label: "Informação por meio de comunicação",
-                        data: [10, 20, 30, 40],
-                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
-                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }
-                    ]
-                }
-            }
-        })
+        // const busca = document.getElementById('busca').getContext('2d');
+        // const chart_41 = new Chart(busca, {
+        //     type: "bar",
+        //     data: {
+        //         labels: ['Nenhum', 'Pouco', 'Intermediário', 'Muito Avançado'],
+        //         datasets: [
+        //             {
+        //                 label: "Informação por meio de comunicação",
+        //                 data: [10, 20, 30, 40],
+        //                 backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
+        //                 borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
+        //                 borderWidth: 1
+        //             },
+        //         ]
+        //     },
+        //     options: {
+        //         scales: {
+        //             yAxes: [
+        //                 {
+        //                     ticks: {
+        //                         beginAtZero: true
+        //                     }
+        //                 }
+        //             ]
+        //         }
+        //     }
+        // })
 
         const jornal = document.getElementById('jornal').getContext('2d');
         const chart_42 = new Chart(jornal, {
             type: "bar",
             data: {
-                labels: ['Diariamente', 'Algumas vezes', 'Somente aos domingos', 'Raramente', 'Não leio'],
+                labels: JSON.parse(sessionStorage.getItem("jornal"))[0],
                 datasets: [
                     {
                         label: "Frequência que lê jornal",
-                        data: [10, 20, 30, 40, 50],
+                        data: JSON.parse(sessionStorage.getItem("jornal"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1488,11 +1487,11 @@
         const chart_43 = new Chart(assuntos, {
             type: "bar",
             data: {
-                labels: ['Não leio', 'Todos os assuntos', 'Notícia locais', 'Notícias nacionais', 'Notícias internacionais', 'Esporte', 'Lazer, arte e cultura', 'Notícias policiais', 'Classificados', 'Moda', 'Sociais'],
+                labels: JSON.parse(sessionStorage.getItem("assuntos"))[0],
                 datasets: [
                     {
                         label: "Assuntos que lê no jornal",
-                        data: [10, 20, 30, 40, 50, 55, 60, 70, 88, 100, 90],
+                        data: JSON.parse(sessionStorage.getItem("assuntos"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1516,11 +1515,11 @@
         const chart_44 = new Chart(livros, {
             type: "bar",
             data: {
-                labels: ['Nenhum', '2', 'Entre 3 e 6', 'Entre 7 e 10', 'Mais de 10'],
+                labels: JSON.parse(sessionStorage.getItem("livros"))[0],
                 datasets: [
                     {
                         label: "Livros lidos por ano",
-                        data: [10, 20, 30, 40, 50],
+                        data: JSON.parse(sessionStorage.getItem("livros"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1544,11 +1543,11 @@
         const chart_45 = new Chart(generos, {
             type: "bar",
             data: {
-                labels: ['Não leio', 'Romance', 'Ficção', 'Policial', 'Biográfico', 'Aventura', 'Autoajuda', 'Outros'],
+                labels: JSON.parse(sessionStorage.getItem("generos_livros"))[0],
                 datasets: [
                     {
                         label: "Gêneros preferidos",
-                        data: [10, 20, 30, 40, 50, 60, 70, 80],
+                        data: JSON.parse(sessionStorage.getItem("generos_livros"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(153, 102, 255, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(153, 102, 255)"],
                         borderWidth: 1
@@ -1572,11 +1571,11 @@
         const chart_46 = new Chart(voluntario, {
             type: "bar",
             data: {
-                labels: ['Sim', 'Não'],
+                labels: JSON.parse(sessionStorage.getItem("voluntarios"))[0],
                 datasets: [
                     {
                         label: "Pratica atividades voluntárias",
-                        data: [10, 20],
+                        data: JSON.parse(sessionStorage.getItem("voluntarios"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -1600,11 +1599,11 @@
         const chart_47 = new Chart(religiao, {
             type: "bar",
             data: {
-                labels: ['Nenhuma', 'Católica', 'Espírita', 'Evangélica', 'Protestante', 'Outra'],
+                labels: JSON.parse(sessionStorage.getItem("religioes"))[0],
                 datasets: [
                     {
                         label: "Religiões",
-                        data: [10, 20, 30, 40, 50, 60],
+                        data: JSON.parse(sessionStorage.getItem("religioes"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -1628,11 +1627,11 @@
         const chart_48 = new Chart(cultura, {
             type: "bar",
             data: {
-                labels: ['Cinema', 'Exposições de arte', 'Filmes na internet', 'Literatura', 'Museus', 'Música', 'Teatro', 'TV', 'Viagens', 'Nenhuma'],
+                labels: JSON.parse(sessionStorage.getItem("entretenimento"))[0],
                 datasets: [
                     {
                         label: "Religiões",
-                        data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                        data: JSON.parse(sessionStorage.getItem("entretenimento"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -1656,11 +1655,11 @@
         const chart_49 = new Chart(fatec, {
             type: "bar",
             data: {
-                labels: ['Cartaz de divulgação', 'Indicação', 'Facebook', 'Jornal', 'Rádio', 'Outdoor', 'Propagando'],
+                labels: JSON.parse(sessionStorage.getItem("conheceu"))[0],
                 datasets: [
                     {
                         label: "Como conheceu a FATEC",
-                        data: [10, 20, 30, 40, 50, 60, 70],
+                        data: JSON.parse(sessionStorage.getItem("conheceu"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -1684,11 +1683,11 @@
         const chart_50 = new Chart(escolheu, {
             type: "bar",
             data: {
-                labels: ['Mercado', 'Boa remuneração', 'Vocação', 'Curso gratuito', 'Duração', 'Curso conceituado', 'Trabalha na área', 'Sugestão', 'Outros'],
+                labels: JSON.parse(sessionStorage.getItem("escolheu"))[0],
                 datasets: [
                     {
                         label: "Porque escolheu o curso",
-                        data: [10, 20, 30, 40, 50, 60, 70, 80, 90],
+                        data: JSON.parse(sessionStorage.getItem("escolheu"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -1712,11 +1711,11 @@
         const chart_51 = new Chart(expect_curso, {
             type: "bar",
             data: {
-                labels: ['Novos conhecimentos', 'Obter competências', 'Conhecer novas pessoas', 'Melhorar-me como pessoa', 'Obter um diploma', 'Outra expectativa', 'Não tenho expectativa'],
+                labels: JSON.parse(sessionStorage.getItem("expect_curso"))[0],
                 datasets: [
                     {
                         label: "Expectativa quanto ao curso",
-                        data: [10, 20, 30, 40, 50, 60, 70],
+                        data: JSON.parse(sessionStorage.getItem("expect_curso"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -1740,11 +1739,11 @@
         const chart_52 = new Chart(expect_formar, {
             type: "bar",
             data: {
-                labels: ['Conquistar vaga', 'Prestar concurso', 'Melhorar cargo e salário', 'Abrir meu próprio negócio', 'Ingressar na carreira acadêmica', 'Outra expectativa', 'Não tenho expectativa'],
+                labels: JSON.parse(sessionStorage.getItem("expect_formar"))[0],
                 datasets: [
                     {
                         label: "Expectativa após se formar",
-                        data: [10, 20, 30, 40, 50, 60, 70],
+                        data: JSON.parse(sessionStorage.getItem("expect_formar"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -1768,11 +1767,11 @@
         const chart_53 = new Chart(curso_tec, {
             type: "bar",
             data: {
-                labels: ['Não fiz', 'Sim, em uma ETEC', 'Sim, no SENAC', 'Sim, no SENAI', 'Sim, em outra instituição'],
+                labels: JSON.parse(sessionStorage.getItem("tecnicos"))[0],
                 datasets: [
                     {
                         label: "Ja fez curso técnico",
-                        data: [10, 20, 30, 40, 50],
+                        data: JSON.parse(sessionStorage.getItem("tecnicos"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -1796,11 +1795,11 @@
         const chart_54 = new Chart(transporte, {
             type: "bar",
             data: {
-                labels: ['Caminhando', 'Carona', 'Bicicleta', 'Moto', 'Carro', 'Ônibus', 'Transporte escolar'],
+                labels: JSON.parse(sessionStorage.getItem("transporte"))[0],
                 datasets: [
                     {
                         label: "Meio de transporte",
-                        data: [10, 20, 30, 40, 50, 60, 70],
+                        data: JSON.parse(sessionStorage.getItem("transporte"))[1],
                         backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
                         borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
                         borderWidth: 1
@@ -1820,8 +1819,7 @@
             }
         })
 
+        sessionStorage.clear()
     </script>
-    
-    
 </body>
 </html>

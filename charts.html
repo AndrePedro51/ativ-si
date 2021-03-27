@@ -45,8 +45,301 @@
         </div>
     </div>
     
+    <!-- Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
     <script src="./js/data.js"></script> 
+
+    <!-- Firebase -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script> -->
+
+    <!-- Moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
+
+    <script>
+        // let firebaseConfig = {
+        //     apiKey: "AIzaSyCkzbyb9ZR58SH98yAYVPgPNXjCGqtn3ps",
+        //     authDomain: "si-perfil-socioeconomico.firebaseapp.com",
+        //     projectId: "si-perfil-socioeconomico",
+        //     storageBucket: "si-perfil-socioeconomico.appspot.com",
+        //     messagingSenderId: "993390061825",
+        //     appId: "1:993390061825:web:409d03991135f9ebdd1300"
+        // };
+
+        // firebase.initializeApp(firebaseConfig);
+
+        // const db = firebase.firestore();
+
+        function count(array) {
+            if (typeof (array[0]) == 'object') {
+                for (let i = 0; i < array.length; i++) {
+                    array[i] = array[i].join();
+                }
+            };
+
+            array.sort();
+
+            let current = null;
+            let cnt = 0;
+
+            let label = [];
+
+            let data = [];
+
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] != current) {
+                    if (cnt > 0) {
+                        label.push(current);
+                        data.push(cnt);
+                    }
+                    current = array[i];
+                    cnt = 1;
+                } else {
+                    cnt++;
+                }
+            }
+            if (cnt > 0) {
+                label.push(current);
+                data.push(cnt);
+            }
+            
+            return [label, data];
+        }
+
+        function getIdade(nasc) {
+            let ano_atual = new Date().getFullYear();
+
+            const data = moment(nasc[2], "YY");
+
+            const ano = data.format("YYYY");
+
+            let idade = ano_atual - ano;
+
+            if (idade < 0) {
+                novo_ano = ano.replaceAll('20', '19');
+
+                idade = ano_atual - novo_ano;
+            }
+
+            return idade;
+        }
+
+        let ExcelToJSON = function () {
+
+            this.parseExcel = function (file) {
+                let reader = new FileReader();
+
+                reader.onload = function (e) {
+                    let data = e.target.result;
+                    let workbook = XLSX.read(data, {
+                        type: 'binary'
+                    });
+
+                    workbook.SheetNames.forEach(function (sheetName) {
+                        let XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                        let json_object = JSON.stringify(XL_row_object);
+
+                        let planilha = JSON.parse(json_object);
+
+                        let cursos = [], periodos = [], estados = [], cidades = [], generos = [], idades = [], estado_civil = [], necessidades = [], convive = [], filhos = [], mora = [], domicilio = [], situacao = [], tempo = [], renda = [];
+
+                        let geladeiras = [], telefones = [], microondas = [], notebooks = [], lavar = [], motos = [], carros = [], dvds = [], tvs = [], celulares = [], domicilio_tem = [], trabalha = [], vinculo = [], area = [], horario = [], plano_saude = [];
+
+                        let grau_pai = [], grau_mae = [], vida_escolar = [], freq_micro = [], onde_micro = [], final_micro = [], conhecimento_info = [], conhecimento_windows = [], conhecimento_linux = [], conhecimento_word = [], conhecimento_excel = [], conhecimento_powerp = [], conhecimento_erp = [];
+
+                        let ingles = [], espanhol = [], outro_idioma = [], televisores = [], internet = [], revista = [], jornal = [], radio = [], redes_sociais = [], conversas = [], jornais = [], assuntos = [], livros = [], generos_livros = [], voluntarios = [];
+
+                        let religioes = [], entretenimento = [], conheceu = [], escolheu = [], expect_curso = [], expect_formar = [], estudou = [], tecnicos = [], transporte = [];
+
+                        for (let i = 0; i < planilha.length; i++) {
+                            cursos.push(planilha[i]['1. Qual o seu curso?']);
+
+                            periodos.push(planilha[i]['2. Qual o período que cursa?']);
+
+                            estados.push(planilha[i]['4. Qual o estado do Brasil que você nasceu?']);
+
+                            cidades.push(planilha[i]['5. Qual sua cidade de residência?']);
+
+                            generos.push(planilha[i]['6. Qual o seu gênero?']);
+
+                            let nasc = planilha[i]['7. Qual a sua data de nascimento?'].split('/');
+
+                            idade = getIdade(nasc)
+
+                            idades.push(idade);
+
+                            estado_civil.push(planilha[i]['8. Qual é o seu estado civil?']);
+
+                            necessidades.push(planilha[i]['9. Você é portador de alguma necessidade especial?(Pode selecionar mais de uma, se for o caso)'].split(','));
+
+                            convive.push(planilha[i]['10. Você convive ou mora com alguma pessoa com deficiência?'].split(','));
+
+                            filhos.push(planilha[i]['11. Quantos filhos você tem?']);
+
+                            mora.push(planilha[i]['12. Com quem você mora atualmente?']);
+
+                            domicilio.push(planilha[i]['13. Quantas pessoas, incluindo você, moram no seu domicílio?']);
+
+                            situacao.push(planilha[i]['14. Qual a situação do domicílio onde mora?']);
+
+                            tempo.push(planilha[i]['15. Tempo de moradia neste domicílio (Em anos)']);
+
+                            renda.push(planilha[i]['16. Qual a faixa de renda mensal da sua família (em Salários Mínimos)']);
+
+                            geladeiras.push(planilha[i]['17.1. Quantas geladeiras há em seu domicílio.']);
+
+                            telefones.push(planilha[i]['17.2. Quantos celulares comuns há em seu domicílio?']);
+
+                            microondas.push(planilha[i]['17.3. Quantos micro-ondas há em seu domicílio?']);
+
+                            notebooks.push(planilha[i]['17.4. Quantos notebooks há em seu domicílio?']);
+
+                            lavar.push(planilha[i]['17.5. Quantas máquinas de lavar roupa e(ou) tanquinho há em seu domicílio?']);
+
+                            motos.push(planilha[i]['17.6. Quantas motocicletas há em seu domicílio?']);
+
+                            carros.push(planilha[i]['17.7. Quantos automóveis há em seu domicílio?']);
+
+                            dvds.push(planilha[i]['17.8. Quantos vídeos cassete e(ou) DVD players há em seu domicílio?']);
+
+                            tvs.push(planilha[i]['17.9. Quantos televisores há em seu domicílio?']);
+
+                            celulares.push(planilha[i]['17.10. Quantos smartphones há em seu domicílio?']);
+
+                            domicilio_tem.push(planilha[i]['18. No seu domicílio tem?']);
+
+                            trabalha.push(planilha[i]['19.1. Você trabalha?']);
+
+                            vinculo.push(planilha[i]['19.2. Qual o seu vínculo com o emprego?']);
+
+                            area.push(planilha[i]['19.3. Qual a área do seu trabalho?']);
+
+                            horario.push(planilha[i]['19.4. Qual seu horário de trabalho?']);
+
+                            plano_saude.push(planilha[i]['20. Você tem plano de saúde privado?']);
+
+                            grau_pai.push(planilha[i]['21.1. Qual o grau de escolaridade do seu pai?']);
+
+                            grau_mae.push(planilha[i]['21.2. Qual o grau de escolaridade da sua mãe?']);
+
+                            vida_escolar.push(planilha[i]['22. Na sua vida escolar você estudou']);
+
+                            freq_micro.push(planilha[i]['23.1. Com que frequência você utiliza microcomputadores?']);
+
+                            onde_micro.push(planilha[i]['23.2. Onde você utiliza microcomputadores?']);
+
+                            final_micro.push(planilha[i]['23.3. Com qual finalidade você utiliza microcomputadores?']);
+
+                            conhecimento_info.push(planilha[i]['24. Como você classifica seu conhecimento em informática']);
+
+                            conhecimento_windows.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Windows]']);
+
+                            conhecimento_linux.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Linux]']);
+
+                            conhecimento_word.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Editores de textos (Word, Writer, etc.)]']);
+
+                            conhecimento_excel.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Planilhas eletrônicas (Excel, Calc, etc.)]']);
+
+                            conhecimento_powerp.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Apresentadores (Powerpoint, Impress, Prezzi, etc.)]']);
+                            
+                            conhecimento_erp.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Sistemas de Gestão Empresaria]']);
+
+                            ingles.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Inglês]']);
+
+                            espanhol.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Espanhol]']);
+
+                            outro_idioma.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Outro Idioma]']);
+
+                            televisores.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Televisores]']);
+
+                            internet.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Internet]']);
+
+                            revista.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Revistas]']);
+
+                            jornal.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Jornais]']);
+
+                            radio.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Rádio]']);
+
+                            redes_sociais.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Redes socias]']);
+
+                            conversas.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Conversas com Amigos]']);
+
+                            jornais.push(planilha[i]['28. Se você lê jornal, qual a frequência?']);
+
+                            assuntos.push(planilha[i]['29. Se você lê jornal, quais os assuntos que mais lê?']);
+
+                            livros.push(planilha[i]['30. Não considerando os livros escolares, quantos livros você lê por ano (em média)?']);
+
+                            generos_livros.push(planilha[i]['31. Se você lê livros literários, qual/quais o(s) gênero(s) preferido(s)?']);
+
+                            voluntarios.push(planilha[i]['32. Você dedica parte do seu tempo para atividades voluntárias?']);
+
+                            religioes.push(planilha[i]['33. Qual religião você professa?']);
+
+                            entretenimento.push(planilha[i]['34. Quais fontes de entretenimento cultural você usa?']);
+
+                            conheceu.push(planilha[i]['35. Estamos quase acabando... Como conheceu a FATEC Franca?']);
+
+                            escolheu.push(planilha[i]['36. Porque você escolheu este curso?']);
+
+                            expect_curso.push(planilha[i]['37. Qual sua maior expectativa quanto ao curso?']);
+
+                            expect_formar.push(planilha[i]['38. Qual sua expectativa após se formar?']);
+
+                            estudou.push(planilha[i]['39. Você já estudou nesta escola?']);
+
+                            tecnicos.push(planilha[i]['40. Você fez algum curso técnico?']);
+
+                            transporte.push(planilha[i]['41. Qual o meio de transporte você usa para vir à escola?']);
+                        }
+
+                        sessionStorage.setItem("cursos", JSON.stringify(count(cursos))); sessionStorage.setItem("periodos", JSON.stringify(count(periodos))); sessionStorage.setItem("estados", JSON.stringify(count(estados))); sessionStorage.setItem("cidades", JSON.stringify(count(cidades))); sessionStorage.setItem("generos", JSON.stringify(count(generos))); sessionStorage.setItem("idades", JSON.stringify(count(idades))); sessionStorage.setItem("estado_civil", JSON.stringify(count(estado_civil)));
+
+                        sessionStorage.setItem("necessidades", JSON.stringify(count(necessidades))); sessionStorage.setItem("convive", JSON.stringify(count(convive))); sessionStorage.setItem("filhos", JSON.stringify(count(convive))); sessionStorage.setItem("mora", JSON.stringify(count(mora))); sessionStorage.setItem("domicilio", JSON.stringify(count(domicilio))); sessionStorage.setItem("situacao", JSON.stringify(count(situacao)));
+
+                        sessionStorage.setItem("tempo", JSON.stringify(count(tempo))); sessionStorage.setItem("renda", JSON.stringify(count(renda))); sessionStorage.setItem("geladeiras", JSON.stringify(count(geladeiras))); sessionStorage.setItem("telefones", JSON.stringify(count(telefones))); sessionStorage.setItem("microondas", JSON.stringify(count(microondas))); sessionStorage.setItem("notebooks", JSON.stringify(count(notebooks)));
+
+                        sessionStorage.setItem("lavar", JSON.stringify(count(lavar))); sessionStorage.setItem("motos", JSON.stringify(count(motos))); sessionStorage.setItem("carros", JSON.stringify(count(carros))); sessionStorage.setItem("dvds", JSON.stringify(count(dvds))); sessionStorage.setItem("tvs", JSON.stringify(count(tvs))); sessionStorage.setItem("celulares", JSON.stringify(count(celulares))); sessionStorage.setItem("domicilio_tem", JSON.stringify(count(domicilio_tem)));
+
+                        sessionStorage.setItem("trabalha", JSON.stringify(count(trabalha))); sessionStorage.setItem("vinculo", JSON.stringify(count(vinculo))); sessionStorage.setItem("area", JSON.stringify(count(area))); sessionStorage.setItem("horario", JSON.stringify(count(horario))); sessionStorage.setItem("plano_saude", JSON.stringify(count(plano_saude))); sessionStorage.setItem("grau_pai", JSON.stringify(count(grau_pai)));
+
+                        sessionStorage.setItem("grau_mae", JSON.stringify(count(grau_mae))); sessionStorage.setItem("vida_escolar", JSON.stringify(count(vida_escolar))); sessionStorage.setItem("freq_micro", JSON.stringify(count(freq_micro))); sessionStorage.setItem("onde_micro", JSON.stringify(count(onde_micro))); sessionStorage.setItem("final_micro", JSON.stringify(count(final_micro)));
+
+                        sessionStorage.setItem("conhecimento_info", JSON.stringify(count(conhecimento_info))); sessionStorage.setItem("conhecimento_windows", JSON.stringify(count(conhecimento_windows))); sessionStorage.setItem("conhecimento_linux", JSON.stringify(count(conhecimento_linux))); sessionStorage.setItem("conhecimento_word", JSON.stringify(count(conhecimento_word)));
+                        
+                        sessionStorage.setItem("conhecimento_excel", JSON.stringify(count(conhecimento_excel))); sessionStorage.setItem("conhecimento_powerp", JSON.stringify(count(conhecimento_powerp))); sessionStorage.setItem("conhecimento_erp", JSON.stringify(count(conhecimento_erp))); sessionStorage.setItem("ingles", JSON.stringify(count(ingles))); sessionStorage.setItem("espanhol", JSON.stringify(count(espanhol))); sessionStorage.setItem("outro_idioma", JSON.stringify(count(outro_idioma)));
+                        
+                        sessionStorage.setItem("televisores", JSON.stringify(count(televisores))); sessionStorage.setItem("internet", JSON.stringify(count(internet))); sessionStorage.setItem("revista", JSON.stringify(count(revista))); sessionStorage.setItem("jornal", JSON.stringify(count(jornal))); sessionStorage.setItem("radio", JSON.stringify(count(radio))); sessionStorage.setItem("redes_sociais", JSON.stringify(count(redes_sociais))); sessionStorage.setItem("conversas", JSON.stringify(count(conversas))); sessionStorage.setItem("jornais", JSON.stringify(count(jornais)));
+
+                        sessionStorage.setItem("assuntos", JSON.stringify(count(assuntos))); sessionStorage.setItem("livros", JSON.stringify(count(livros))); sessionStorage.setItem("generos_livros", JSON.stringify(count(generos_livros))); sessionStorage.setItem("voluntarios", JSON.stringify(count(voluntarios))); sessionStorage.setItem("religioes", JSON.stringify(count(religioes)));
+
+                        sessionStorage.setItem("entretenimento", JSON.stringify(count(entretenimento))); sessionStorage.setItem("conheceu", JSON.stringify(count(conheceu))); sessionStorage.setItem("escolheu", JSON.stringify(count(escolheu))); sessionStorage.setItem("expect_curso", JSON.stringify(count(expect_curso))); sessionStorage.setItem("expect_formar", JSON.stringify(count(expect_formar)));
+
+                        sessionStorage.setItem("estudou", JSON.stringify(count(estudou))); sessionStorage.setItem("tecnicos", JSON.stringify(count(tecnicos))); sessionStorage.setItem("transporte", JSON.stringify(count(transporte)));
+                    })
+
+                };
+
+                reader.onerror = function (ex) {
+                    console.log(ex);
+                };
+
+                reader.readAsBinaryString(file);
+            };
+        };
+
+        function periodo(val) {
+            return val == 'Noturno';
+        }
+
+        function handleFileSelect(evt) {
+            let files = evt.target.files; // FileList object
+            let xl2json = new ExcelToJSON();
+            xl2json.parseExcel(files[0]);
+        }
+
+        document.getElementById("inputFile").addEventListener("change", handleFileSelect, false);
+    </script>
 </body>
 </html>
