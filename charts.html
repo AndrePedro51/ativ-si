@@ -4,13 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <title>Importar arquivo</title>
 </head>
-<body;">
+<body>
+    <!-- Variáveis -->
+    <script src="js/data.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Funções -->
+    <script src="js/helpers.js"></script>
+        
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+    <script src="js/firebase.js"></script>
+
+    <!-- Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+
+    <!-- Moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
+
+    <!-- Toast -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
     <div class="menu">
         <div class="center">
             <a href="index.html"><img src="img/home2x.png" alt=""></a>
@@ -20,111 +45,51 @@
     </div>
     <div class="charts center">
         <div class="filtros">
-            <select class="curso" id="curso" >
-                <option>Selecione o Curso</option>
-                <option>Análise e Desenvolvimento de Sistemas</option>
-                <option>Gestão de Recursos Humanos</option>
-                <option>Desenvolvimento de Software Multiplataformas</option>
-                <option>Gestão de Produção Industrial</option>
-                <option>Gestão Empresarial (EAD)</option>
+            <select class="curso" id="filtro_curso" >
+                <option value="">Selecione o Curso</option>
+                <option value="1">Análise e Desenvolvimento de Sistemas (ADS)</option>
+                <option value="2">Gestão de Recursos Humanos</option>
+                <option value="3">Desenvolvimento de Software Multiplataformas</option>
+                <option value="4">Gestão de Produção Industrial (GPI)</option>
+                <option value="5">Gestão Empresarial (EAD)</option>
               </select>
-              <select class="periodo" id="periodo" >
-                <option>Selecione o Período</option>
-                <option>Matutino</option>
-                <option>Noturno</option>
+              <select class="periodo" id="filtro_periodo" >
+                <option value="">Selecione o Período</option>
+                <option value="1">Matutino</option>
+                <option value="2">Noturno</option>
               </select>
         </div>
         <div class="import">
-            <img src="img/icon-import.png" alt="" style="width: 170px;;"><br>
-            <input type="file" id="inputFile">
+            <img src="img/icon-import.png" alt="" style="width: 170px;"><br>
+            <input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" id="inputFile">
             <label for="inputFile">IMPORTAR ARQUIVO</label>
         </div>
         <div class="generate">
             <img src="img/icon-generate.png" alt=""><br>
-            <a href="results.html"><button>GERAR RESULTADOS</button></a>
+            <a href="results.html"><button id="submit">GERAR RESULTADOS</button></a>
         </div>
     </div>
-    
-    <!-- Excel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
-    <script src="./js/data.js"></script> 
-
-    <!-- Firebase -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script> -->
-
-    <!-- Moment -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
 
     <script>
-        // let firebaseConfig = {
-        //     apiKey: "AIzaSyCkzbyb9ZR58SH98yAYVPgPNXjCGqtn3ps",
-        //     authDomain: "si-perfil-socioeconomico.firebaseapp.com",
-        //     projectId: "si-perfil-socioeconomico",
-        //     storageBucket: "si-perfil-socioeconomico.appspot.com",
-        //     messagingSenderId: "993390061825",
-        //     appId: "1:993390061825:web:409d03991135f9ebdd1300"
-        // };
+        $(document).ready(function() {
+            let extensions = ['csv', 'xlsx'];
 
-        // firebase.initializeApp(firebaseConfig);
+            $('#submit').click(function(e) {
+                if ($('#inputFile').val().length === 0) {
+                    e.preventDefault();
 
-        // const db = firebase.firestore();
-
-        function count(array) {
-            if (typeof (array[0]) == 'object') {
-                for (let i = 0; i < array.length; i++) {
-                    array[i] = array[i].join();
+                    toastr.error('Por favor, importe uma planilha excel para gerar os gráficos!');
                 }
-            };
+            })
 
-            array.sort();
-
-            let current = null;
-            let cnt = 0;
-
-            let label = [];
-
-            let data = [];
-
-            for (let i = 0; i < array.length; i++) {
-                if (array[i] != current) {
-                    if (cnt > 0) {
-                        label.push(current);
-                        data.push(cnt);
-                    }
-                    current = array[i];
-                    cnt = 1;
-                } else {
-                    cnt++;
+            $('#inputFile').change(function() {
+                if ($.inArray($(this).val().split('.').pop().toLowerCase(), extensions) == -1) {
+                    toastr.error(`Apenas os seguintes formatos são permitidos : ${extensions.join(', ').toUpperCase()} `);
+                    $(this).val('');
                 }
-            }
-            if (cnt > 0) {
-                label.push(current);
-                data.push(cnt);
-            }
-            
-            return [label, data];
-        }
-
-        function getIdade(nasc) {
-            let ano_atual = new Date().getFullYear();
-
-            const data = moment(nasc[2], "YY");
-
-            const ano = data.format("YYYY");
-
-            let idade = ano_atual - ano;
-
-            if (idade < 0) {
-                novo_ano = ano.replaceAll('20', '19');
-
-                idade = ano_atual - novo_ano;
-            }
-
-            return idade;
-        }
-
+            })
+        })
+        
         let ExcelToJSON = function () {
 
             this.parseExcel = function (file) {
@@ -142,15 +107,7 @@
 
                         let planilha = JSON.parse(json_object);
 
-                        let cursos = [], periodos = [], estados = [], cidades = [], generos = [], idades = [], estado_civil = [], necessidades = [], convive = [], filhos = [], mora = [], domicilio = [], situacao = [], tempo = [], renda = [];
-
-                        let geladeiras = [], telefones = [], microondas = [], notebooks = [], lavar = [], motos = [], carros = [], dvds = [], tvs = [], celulares = [], domicilio_tem = [], trabalha = [], vinculo = [], area = [], horario = [], plano_saude = [];
-
-                        let grau_pai = [], grau_mae = [], vida_escolar = [], freq_micro = [], onde_micro = [], final_micro = [], conhecimento_info = [], conhecimento_windows = [], conhecimento_linux = [], conhecimento_word = [], conhecimento_excel = [], conhecimento_powerp = [], conhecimento_erp = [];
-
-                        let ingles = [], espanhol = [], outro_idioma = [], televisores = [], internet = [], revista = [], jornal = [], radio = [], redes_sociais = [], conversas = [], jornais = [], assuntos = [], livros = [], generos_livros = [], voluntarios = [];
-
-                        let religioes = [], entretenimento = [], conheceu = [], escolheu = [], expect_curso = [], expect_formar = [], estudou = [], tecnicos = [], transporte = [];
+                        planilha = filter(planilha);
 
                         for (let i = 0; i < planilha.length; i++) {
                             cursos.push(planilha[i]['1. Qual o seu curso?']);
@@ -242,7 +199,7 @@
                             conhecimento_excel.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Planilhas eletrônicas (Excel, Calc, etc.)]']);
 
                             conhecimento_powerp.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Apresentadores (Powerpoint, Impress, Prezzi, etc.)]']);
-                            
+
                             conhecimento_erp.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Sistemas de Gestão Empresaria]']);
 
                             ingles.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Inglês]']);
@@ -294,52 +251,301 @@
                             transporte.push(planilha[i]['41. Qual o meio de transporte você usa para vir à escola?']);
                         }
 
-                        sessionStorage.setItem("cursos", JSON.stringify(count(cursos))); sessionStorage.setItem("periodos", JSON.stringify(count(periodos))); sessionStorage.setItem("estados", JSON.stringify(count(estados))); sessionStorage.setItem("cidades", JSON.stringify(count(cidades))); sessionStorage.setItem("generos", JSON.stringify(count(generos))); sessionStorage.setItem("idades", JSON.stringify(count(idades))); sessionStorage.setItem("estado_civil", JSON.stringify(count(estado_civil)));
-
-                        sessionStorage.setItem("necessidades", JSON.stringify(count(necessidades))); sessionStorage.setItem("convive", JSON.stringify(count(convive))); sessionStorage.setItem("filhos", JSON.stringify(count(convive))); sessionStorage.setItem("mora", JSON.stringify(count(mora))); sessionStorage.setItem("domicilio", JSON.stringify(count(domicilio))); sessionStorage.setItem("situacao", JSON.stringify(count(situacao)));
-
-                        sessionStorage.setItem("tempo", JSON.stringify(count(tempo))); sessionStorage.setItem("renda", JSON.stringify(count(renda))); sessionStorage.setItem("geladeiras", JSON.stringify(count(geladeiras))); sessionStorage.setItem("telefones", JSON.stringify(count(telefones))); sessionStorage.setItem("microondas", JSON.stringify(count(microondas))); sessionStorage.setItem("notebooks", JSON.stringify(count(notebooks)));
-
-                        sessionStorage.setItem("lavar", JSON.stringify(count(lavar))); sessionStorage.setItem("motos", JSON.stringify(count(motos))); sessionStorage.setItem("carros", JSON.stringify(count(carros))); sessionStorage.setItem("dvds", JSON.stringify(count(dvds))); sessionStorage.setItem("tvs", JSON.stringify(count(tvs))); sessionStorage.setItem("celulares", JSON.stringify(count(celulares))); sessionStorage.setItem("domicilio_tem", JSON.stringify(count(domicilio_tem)));
-
-                        sessionStorage.setItem("trabalha", JSON.stringify(count(trabalha))); sessionStorage.setItem("vinculo", JSON.stringify(count(vinculo))); sessionStorage.setItem("area", JSON.stringify(count(area))); sessionStorage.setItem("horario", JSON.stringify(count(horario))); sessionStorage.setItem("plano_saude", JSON.stringify(count(plano_saude))); sessionStorage.setItem("grau_pai", JSON.stringify(count(grau_pai)));
-
-                        sessionStorage.setItem("grau_mae", JSON.stringify(count(grau_mae))); sessionStorage.setItem("vida_escolar", JSON.stringify(count(vida_escolar))); sessionStorage.setItem("freq_micro", JSON.stringify(count(freq_micro))); sessionStorage.setItem("onde_micro", JSON.stringify(count(onde_micro))); sessionStorage.setItem("final_micro", JSON.stringify(count(final_micro)));
-
-                        sessionStorage.setItem("conhecimento_info", JSON.stringify(count(conhecimento_info))); sessionStorage.setItem("conhecimento_windows", JSON.stringify(count(conhecimento_windows))); sessionStorage.setItem("conhecimento_linux", JSON.stringify(count(conhecimento_linux))); sessionStorage.setItem("conhecimento_word", JSON.stringify(count(conhecimento_word)));
-                        
-                        sessionStorage.setItem("conhecimento_excel", JSON.stringify(count(conhecimento_excel))); sessionStorage.setItem("conhecimento_powerp", JSON.stringify(count(conhecimento_powerp))); sessionStorage.setItem("conhecimento_erp", JSON.stringify(count(conhecimento_erp))); sessionStorage.setItem("ingles", JSON.stringify(count(ingles))); sessionStorage.setItem("espanhol", JSON.stringify(count(espanhol))); sessionStorage.setItem("outro_idioma", JSON.stringify(count(outro_idioma)));
-                        
-                        sessionStorage.setItem("televisores", JSON.stringify(count(televisores))); sessionStorage.setItem("internet", JSON.stringify(count(internet))); sessionStorage.setItem("revista", JSON.stringify(count(revista))); sessionStorage.setItem("jornal", JSON.stringify(count(jornal))); sessionStorage.setItem("radio", JSON.stringify(count(radio))); sessionStorage.setItem("redes_sociais", JSON.stringify(count(redes_sociais))); sessionStorage.setItem("conversas", JSON.stringify(count(conversas))); sessionStorage.setItem("jornais", JSON.stringify(count(jornais)));
-
-                        sessionStorage.setItem("assuntos", JSON.stringify(count(assuntos))); sessionStorage.setItem("livros", JSON.stringify(count(livros))); sessionStorage.setItem("generos_livros", JSON.stringify(count(generos_livros))); sessionStorage.setItem("voluntarios", JSON.stringify(count(voluntarios))); sessionStorage.setItem("religioes", JSON.stringify(count(religioes)));
-
-                        sessionStorage.setItem("entretenimento", JSON.stringify(count(entretenimento))); sessionStorage.setItem("conheceu", JSON.stringify(count(conheceu))); sessionStorage.setItem("escolheu", JSON.stringify(count(escolheu))); sessionStorage.setItem("expect_curso", JSON.stringify(count(expect_curso))); sessionStorage.setItem("expect_formar", JSON.stringify(count(expect_formar)));
-
-                        sessionStorage.setItem("estudou", JSON.stringify(count(estudou))); sessionStorage.setItem("tecnicos", JSON.stringify(count(tecnicos))); sessionStorage.setItem("transporte", JSON.stringify(count(transporte)));
+                        db.collection('planilhas').add({
+                            'cursos': {
+                                'label': count(cursos)[0], 
+                                'data': count(cursos)[1]
+                            },
+                            'periodos': {
+                                'label': count(periodos)[0], 
+                                'data': count(periodos)[1]
+                            },
+                            'estados': {
+                                'label': count(estados)[0], 
+                                'data': count(estados)[1]
+                            },
+                            'cidades': {
+                                'label': count(cidades)[0], 
+                                'data': count(cidades)[1]
+                            },
+                            'generos': {
+                                'label': count(generos)[0], 
+                                'data': count(generos)[1]
+                            },
+                            'idades': {
+                                'label': count(idades)[0], 
+                                'data': count(idades)[1]
+                            },
+                            'estado_civil': {
+                                'label': count(estado_civil)[0], 
+                                'data': count(estado_civil)[1]
+                            },
+                            'necessidades': {
+                                'label': count(necessidades)[0], 
+                                'data': count(necessidades)[1]
+                            },
+                            'convive': {
+                                'label': count(convive)[0], 
+                                'data': count(convive)[1]
+                            },
+                            'filhos': {
+                                'label': count(filhos)[0], 
+                                'data': count(filhos)[1]
+                            },
+                            'mora': {
+                                'label': count(mora)[0], 
+                                'data': count(mora)[1]
+                            },
+                            'domicilio': {
+                                'label': count(domicilio)[0], 
+                                'data': count(domicilio)[1]
+                            },
+                            'situacao': {
+                                'label': count(situacao)[0], 
+                                'data': count(situacao)[1]
+                            },
+                            'tempo': {
+                                'label': count(tempo)[0], 
+                                'data': count(tempo)[1]
+                            },
+                            'renda': {
+                                'label': count(renda)[0], 
+                                'data': count(renda)[1]
+                            },
+                            'geladeiras': {
+                                'label': count(geladeiras)[0], 
+                                'data': count(geladeiras)[1]
+                            },
+                            'telefones': {
+                                'label': count(telefones)[0], 
+                                'data': count(telefones)[1]
+                            },
+                            'microondas': {
+                                'label': count(microondas)[0], 
+                                'data': count(microondas)[1]
+                            },
+                            'notebooks': {
+                                'label': count(notebooks)[0], 
+                                'data': count(notebooks)[1]
+                            },
+                            'lavar': {
+                                'label': count(lavar)[0], 
+                                'data': count(lavar)[1]
+                            },
+                            'motos': {
+                                'label': count(motos)[0], 
+                                'data': count(motos)[1]
+                            },
+                            'carros': {
+                                'label': count(carros)[0], 
+                                'data': count(carros)[1]
+                            },
+                            'dvds': {
+                                'label': count(dvds)[0], 
+                                'data': count(dvds)[1]
+                            },
+                            'tvs': {
+                                'label': count(tvs)[0], 
+                                'data': count(tvs)[1]
+                            },
+                            'celulares': {
+                                'label': count(celulares)[0], 
+                                'data': count(celulares)[1]
+                            },
+                            'domicilio_tem': {
+                                'label': count(domicilio_tem)[0], 
+                                'data': count(domicilio_tem)[1]
+                            },
+                            'trabalha': {
+                                'label': count(trabalha)[0], 
+                                'data': count(trabalha)[1]
+                            },
+                            'vinculo': {
+                                'label': count(vinculo)[0], 
+                                'data': count(vinculo)[1]
+                            },
+                            'area': {
+                                'label': count(area)[0], 
+                                'data': count(area)[1]
+                            },
+                            'horario': {
+                                'label': count(horario)[0], 
+                                'data': count(horario)[1]
+                            },
+                            'plano_saude': {
+                                'label': count(plano_saude)[0], 
+                                'data': count(plano_saude)[1]
+                            },
+                            'grau_pai': {
+                                'label': count(grau_pai)[0], 
+                                'data': count(grau_pai)[1]
+                            },
+                            'grau_mae': {
+                                'label': count(grau_mae)[0], 
+                                'data': count(grau_mae)[1]
+                            },
+                            'vida_escolar': {
+                                'label': count(vida_escolar)[0], 
+                                'data': count(vida_escolar)[1]
+                            },
+                            'freq_micro': {
+                                'label': count(freq_micro)[0], 
+                                'data': count(freq_micro)[1]
+                            },
+                            'onde_micro': {
+                                'label': count(onde_micro)[0], 
+                                'data': count(onde_micro)[1]
+                            },
+                            'final_micro': {
+                                'label': count(final_micro)[0], 
+                                'data': count(final_micro)[1]
+                            },
+                            'conhecimento_info': {
+                                'label': count(conhecimento_info)[0], 
+                                'data': count(conhecimento_info)[1]
+                            },
+                            'conhecimento_windows': {
+                                'label': count(conhecimento_windows)[0], 
+                                'data': count(conhecimento_windows)[1]
+                            },
+                            'conhecimento_linux': {
+                                'label': count(conhecimento_linux)[0], 
+                                'data': count(conhecimento_linux)[1]
+                            },
+                            'conhecimento_word': {
+                                'label': count(conhecimento_word)[0], 
+                                'data': count(conhecimento_word)[1]
+                            },
+                            'conhecimento_excel': {
+                                'label': count(conhecimento_excel)[0], 
+                                'data': count(conhecimento_excel)[1]
+                            },
+                            'conhecimento_powerp': {
+                                'label': count(conhecimento_powerp)[0], 
+                                'data': count(conhecimento_powerp)[1]
+                            },
+                            'conhecimento_erp': {
+                                'label': count(conhecimento_erp)[0], 
+                                'data': count(conhecimento_erp)[1]
+                            },
+                            'ingles': {
+                                'label': count(ingles)[0], 
+                                'data': count(ingles)[1]
+                            },
+                            'espanhol': {
+                                'label': count(espanhol)[0], 
+                                'data': count(espanhol)[1]
+                            },
+                            'outro_idioma': {
+                                'label': count(outro_idioma)[0], 
+                                'data': count(outro_idioma)[1]
+                            },
+                            'televisores': {
+                                'label': count(televisores)[0], 
+                                'data': count(televisores)[1]
+                            },
+                            'internet': {
+                                'label': count(internet)[0], 
+                                'data': count(internet)[1]
+                            },
+                            'revista': {
+                                'label': count(revista)[0], 
+                                'data': count(revista)[1]
+                            },
+                            'jornal': {
+                                'label': count(jornal)[0], 
+                                'data': count(jornal)[1]
+                            },
+                            'radio': {
+                                'label': count(radio)[0], 
+                                'data': count(radio)[1]
+                            },
+                            'redes_sociais': {
+                                'label': count(redes_sociais)[0], 
+                                'data': count(redes_sociais)[1]
+                            },
+                            'conversas': {
+                                'label': count(conversas)[0], 
+                                'data': count(conversas)[1]
+                            },
+                            'jornais': {
+                                'label': count(jornais)[0], 
+                                'data': count(jornais)[1]
+                            },
+                            'assuntos': {
+                                'label': count(assuntos)[0], 
+                                'data': count(assuntos)[1]
+                            },
+                            'livros': {
+                                'label': count(livros)[0], 
+                                'data': count(livros)[1]
+                            },
+                            'generos_livros': {
+                                'label': count(generos_livros)[0], 
+                                'data': count(generos_livros)[1]
+                            },
+                            'voluntarios': {
+                                'label': count(voluntarios)[0], 
+                                'data': count(voluntarios)[1]
+                            },
+                            'religioes': {
+                                'label': count(religioes)[0], 
+                                'data': count(religioes)[1]
+                            },
+                            'entretenimento': {
+                                'label': count(entretenimento)[0], 
+                                'data': count(entretenimento)[1]
+                            },
+                            'conheceu': {
+                                'label': count(conheceu)[0], 
+                                'data': count(conheceu)[1]
+                            },
+                            'escolheu': {
+                                'label': count(escolheu)[0], 
+                                'data': count(escolheu)[1]
+                            },
+                            'expect_curso': {
+                                'label': count(expect_curso)[0], 
+                                'data': count(expect_curso)[1]
+                            },
+                            'expect_formar': {
+                                'label': count(expect_formar)[0], 
+                                'data': count(expect_formar)[1]
+                            },
+                            'estudou': {
+                                'label': count(estudou)[0], 
+                                'data': count(estudou)[1]
+                            },
+                            'tecnicos': {
+                                'label': count(tecnicos)[0], 
+                                'data': count(tecnicos)[1]
+                            },
+                            'transporte': {
+                                'label': count(transporte)[0], 
+                                'data': count(transporte)[1]
+                            } 
+                        }).then(function(res) {
+                            console.log(`Salvou! ID Doc: ${res.id}`);
+                            sessionStorage.setItem('id', JSON.stringify(res.id));
+                        }).catch(err => (console.log(`Ocorreu um erro: ${err}`)))
                     })
-
                 };
 
-                reader.onerror = function (ex) {
-                    console.log(ex);
+                reader.onerror = function (err) {
+                    console.log(err);
                 };
 
                 reader.readAsBinaryString(file);
             };
         };
 
-        function periodo(val) {
-            return val == 'Noturno';
-        }
-
-        function handleFileSelect(evt) {
+        function getExcel(evt) {
             let files = evt.target.files; // FileList object
             let xl2json = new ExcelToJSON();
             xl2json.parseExcel(files[0]);
         }
 
-        document.getElementById("inputFile").addEventListener("change", handleFileSelect, false);
+        $('#inputFile').change(getExcel);
     </script>
 </body>
 </html>
