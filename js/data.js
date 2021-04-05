@@ -1,4 +1,4 @@
-let cursos = [], periodos = [], estados = [], cidades = [], generos = [], idades = [], estado_civil = [], necessidades = [], convive = [], filhos = [], mora = [], domicilio = [], situacao = [], tempo = [], renda = [];
+let planilha_aux = [], cursos = [], periodos = [], estados = [], cidades = [], generos = [], idades = [], estado_civil = [], necessidades = [], convive = [], filhos = [], mora = [], domicilio = [], situacao = [], tempo = [], renda = [];
 
 let geladeiras = [], telefones = [], microondas = [], notebooks = [], lavar = [], motos = [], carros = [], dvds = [], tvs = [], celulares = [], domicilio_tem = [], trabalha = [], vinculo = [], area = [], horario = [], plano_saude = [];
 

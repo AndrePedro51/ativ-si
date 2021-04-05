@@ -43,21 +43,22 @@
             <a href="about.html"><img src="img/about2x.png" alt=""></a>
         </div>
     </div>
+
     <div class="charts center">
         <div class="filtros">
-            <select class="curso" id="filtro_curso" >
-                <option value="">Selecione o Curso</option>
-                <option value="1">Análise e Desenvolvimento de Sistemas (ADS)</option>
-                <option value="2">Gestão de Recursos Humanos</option>
-                <option value="3">Desenvolvimento de Software Multiplataformas</option>
-                <option value="4">Gestão de Produção Industrial (GPI)</option>
-                <option value="5">Gestão Empresarial (EAD)</option>
-              </select>
-              <select class="periodo" id="filtro_periodo" >
-                <option value="">Selecione o Período</option>
-                <option value="1">Matutino</option>
-                <option value="2">Noturno</option>
-              </select>
+            <select class="curso" id="filtro_curso">
+                <option value="" selected>Selecione o Curso...</option>
+                <option value="">Análise e Desenvolvimento de Sistemas (ADS)</option>
+                <option value="">Gestão de Recursos Humanos</option>
+                <option value="">Desenvolvimento de Software Multiplataformas</option>
+                <option value="">Gestão de Produção Industrial (GPI)</option>
+                <option value="">Gestão Empresarial (EAD)</option>
+            </select>
+            <select class="periodo" id="filtro_periodo" >
+                <option value="" selected>Selecione o Período...</option>
+                <option value="">Matutino</option>
+                <option value="">Noturno</option>
+            </select>
         </div>
         <div class="import">
             <img src="img/icon-import.png" alt="" style="width: 170px;"><br>
@@ -66,32 +67,12 @@
         </div>
         <div class="generate">
             <img src="img/icon-generate.png" alt=""><br>
-            <a href="results.html"><button id="submit">GERAR RESULTADOS</button></a>
+            <a href=""><button id="submit">GERAR RESULTADOS</button></a>
         </div>
     </div>
 
     <script>
-        $(document).ready(function() {
-            let extensions = ['csv', 'xlsx'];
-
-            $('#submit').click(function(e) {
-                if ($('#inputFile').val().length === 0) {
-                    e.preventDefault();
-
-                    toastr.error('Por favor, importe uma planilha excel para gerar os gráficos!');
-                }
-            })
-
-            $('#inputFile').change(function() {
-                if ($.inArray($(this).val().split('.').pop().toLowerCase(), extensions) == -1) {
-                    toastr.error(`Apenas os seguintes formatos são permitidos : ${extensions.join(', ').toUpperCase()} `);
-                    $(this).val('');
-                }
-            })
-        })
-        
         let ExcelToJSON = function () {
-
             this.parseExcel = function (file) {
                 let reader = new FileReader();
 
@@ -110,6 +91,8 @@
                         planilha = filter(planilha);
 
                         for (let i = 0; i < planilha.length; i++) {
+                            planilha_aux.push(planilha[i]);
+                            
                             cursos.push(planilha[i]['1. Qual o seu curso?']);
 
                             periodos.push(planilha[i]['2. Qual o período que cursa?']);
@@ -249,7 +232,7 @@
                             tecnicos.push(planilha[i]['40. Você fez algum curso técnico?']);
 
                             transporte.push(planilha[i]['41. Qual o meio de transporte você usa para vir à escola?']);
-                        }
+                        };
 
                         db.collection('planilhas').add({
                             'cursos': {
@@ -523,12 +506,15 @@
                             'transporte': {
                                 'label': count(transporte)[0], 
                                 'data': count(transporte)[1]
-                            } 
+                            }
                         }).then(function(res) {
-                            console.log(`Salvou! ID Doc: ${res.id}`);
+                            console.log(`Salvou! ID Doc: ${ res.id }`);
+
                             sessionStorage.setItem('id', JSON.stringify(res.id));
-                        }).catch(err => (console.log(`Ocorreu um erro: ${err}`)))
-                    })
+
+                            location.href = 'results.html';
+                        }).catch(err => (toastr.error(`Ocorreu um erro: ${ err }`)));
+                    });
                 };
 
                 reader.onerror = function (err) {
@@ -539,13 +525,43 @@
             };
         };
 
-        function getExcel(evt) {
-            let files = evt.target.files; // FileList object
-            let xl2json = new ExcelToJSON();
-            xl2json.parseExcel(files[0]);
-        }
+        let change;
 
-        $('#inputFile').change(getExcel);
+        $('#inputFile').change(function(event) {
+            change = event;
+
+            // if (typeof(planilha[0]['1. Qual o seu curso?']) === 'undefined') {
+            //     toastr.error('A planilha importada não corresponde a um Questionário Socioeconômico!')
+
+            //     $('#inputFile').val('');
+            // }
+            
+            let extensions = ['csv', 'xlsx'];
+
+            if ($.inArray($(this).val().split('.').pop().toLowerCase(), extensions) == -1) {
+                toastr.error(`Apenas os seguintes formatos são permitidos : ${ extensions.join(', ').toUpperCase()} `);
+                
+                $('#inputFile').val('');
+            } else {
+                toastr.success('Planilha Excel importada com sucesso!');
+            }
+        })
+
+        $('#submit').click(function (e) {
+
+            e.preventDefault();
+
+            if (typeof(change) !== 'undefined') {
+                let files = change.target.files; // FileList object
+
+                let xl2json = new ExcelToJSON();
+
+                xl2json.parseExcel(files[0]);
+            } else {
+                toastr.warning('Por favor, importe uma planilha excel para gerar os gráficos!');
+            }
+            
+        });
     </script>
 </body>
 </html>

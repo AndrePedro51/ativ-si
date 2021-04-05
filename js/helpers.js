@@ -65,7 +65,7 @@ function filter(planilha) {
     let new_planilha = [];
     
     planilha.forEach(function (data) {
-        if (filtro_curso !== 'Selecione o Curso') {
+        if (filtro_curso !== 'Selecione o Curso...') {
             if (data['1. Qual o seu curso?'] === filtro_curso) {
                 aux.push(data);
             }
@@ -75,7 +75,7 @@ function filter(planilha) {
     })
     
     aux.forEach(function (data) {
-        if (filtro_periodo !== 'Selecione o Período') {
+        if (filtro_periodo !== 'Selecione o Período...') {
             if (data['2. Qual o período que cursa?'] === filtro_periodo) {
                 new_planilha.push(data);
             }
@@ -85,4 +85,24 @@ function filter(planilha) {
     })
 
     return new_planilha;
-}
+};
+
+// let Excel = function () {
+//     this.validarExcel = function (file) {
+//         let reader = new FileReader();
+
+//         reader.onload = function (e) {
+//             let data = e.target.result;
+//             let workbook = XLSX.read(data, {
+//                 type: 'binary'
+//             });
+
+//             workbook.SheetNames.forEach(function (sheetName) {
+//                 let XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+//                 let json_object = JSON.stringify(XL_row_object);
+
+//                 return JSON.parse(json_object);
+//             });
+//         };
+//     };
+// };
