@@ -12,7 +12,6 @@ body{
     background-color: #001550;
 }
 .menu img{
-    
     padding: 1%;
     width: 3%;
     min-width: 30px;
@@ -49,6 +48,7 @@ body{
     font-weight: bold;
     font-size: 20pt;
     color: #001550;
+    transition: 0.3s;
 }
 .button{
     display: flex;
@@ -57,7 +57,7 @@ body{
 }
 .charts{
     text-align: center;
-    margin-top: 12%;
+    margin-top: 8%;
     width: 55%;
     display: flex;
     flex-wrap: wrap;
@@ -70,7 +70,10 @@ body{
     width: 150px;
     margin-bottom: 10%;
 }
+
+
 .charts button{
+    transition: 0.3s;
     cursor: pointer;
     border: none;
     border-radius: 10px;
@@ -81,6 +84,7 @@ body{
     background-color: #001550;
 }
 .charts label{
+    transition: 0.3s;
     cursor: pointer;
     border: none;
     border-radius: 10px;
@@ -180,8 +184,35 @@ body{
 .about-icon:hover .img-hover{
     display: inline-block;
 }
+.img-home-text button:hover{
+    background-color: transparent;
+    color: white;
+    border: 3px white solid;
+}
+.charts button:hover{
+    background-color: transparent;
+    color: #001550;
+    border: 3px #001550 solid;
+}
+.charts label:hover{
+    background-color: transparent;
+    color: #001550;
+    border: 3px #001550 solid;
+}
 
-
+.ultimas-pesquisas h1{
+    margin-top: 35px;
+    text-align: center;
+}
+.ultimas-pesquisas table{
+    margin-top: 25px;
+    border-collapse: collapse;
+}
+.ultimas-pesquisas td, th{
+    border: 2px solid #001550;
+    text-align: left;
+    padding: 8px;
+}
 
 @media (max-width: 900px){
     .img-home img{
