@@ -7,21 +7,32 @@ body{
     animation: load 0.3s ease-in;
 }
 .menu{
-    min-height: 50px;
-    width: 100vw;
+    width: 100%;
+    padding:25px 0;
     background-color: #001550;
 }
-.menu img{
-    padding: 1%;
+.menu a{
+    text-decoration: none;
+    color: white;
     width: 3%;
+    margin-right: 50px;
     min-width: 30px;
-    margin-right: 3%;
-    margin-top: 5px;
+    transition: .1s linear;
+    font-size: 18px;
 }
+.menu-selecionado{
+    border-bottom: 4px solid white;
+    border-radius: 2px;
+}
+.menu-hover:hover{
+    border-bottom: 4px solid white;
+    border-radius: 2px;
+}
+
 .center{
     margin: auto;
-    max-width: 1200px;
-    width: 80vw;
+    max-width: 1400px;
+    width: 80%;
 }
 .img-home{
     height: 80vh;
@@ -106,19 +117,84 @@ body{
 }
 
 .equipe{
-    margin-top: 12%;
+    width: 90vw;
+    margin-top: 6%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content:space-evenly;
     
 }
+.card-header{
+    padding: 60px 40px;
+}
+.card-header .name{
+    font-size: 28px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+.card-header .desc{
+    font-size: 18px;
+    margin: 10px 0;
+}
+.card-header .sm{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.card-header .sm a{
+    text-decoration: none;
+    color: white;
+    width: 56px;
+    font-size: 30px;
+    transition: .2s linear;
+}
+.card-header .sm a:hover{
+    font-size: 35px;
+}
+.contact-btn{
+    text-decoration: none;
+    display: inline-block;
+    padding: 12px 25px;
+    color: #001550;
+    background: white;
+    border-radius: 6px;
+    margin-top: 20px;
+    transition: .2s linear;
+    font-size: 20px;
+}
+.contact-btn:hover{
+    background: #001550;
+    border:2px solid white;
+    color: white;
+}
 .equipe-item{
+    overflow: hidden;
+    text-align: center;
     margin-top: 2%;
     border-radius: 10px;
-    width: 250px;
-    height: 350px;
+    width: 295px;
+    height: 450px;
     background-color: #001550;
+    color: white;
+    transition: ease-in .15s;
+    box-shadow: 5px 5px 5px black;
+}
+.equipe-item:hover{
+    margin-top: 1%;
+}
+.foto{
+    display: inline-block;
+    padding: 8px;
+    background: white;
+    margin: auto;
+    border-radius: 50%;
+}
+.foto img{
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 .seta-voltar{
@@ -133,13 +209,15 @@ body{
 .seta-voltar img{ 
     width: 40px;
 }
+
 .grafico{
-    text-align: center;
-    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
     margin-bottom: 40px;
 }
 .grafico canvas{
-    margin-top: 25px;
+    margin:auto;
 }
 .panel-group{
     margin-top: 40px;
@@ -160,34 +238,6 @@ body{
     
 }
 
-
-.home-icon .img-hover{
-    display: none;
-}
-.home-icon:hover .img-padrao{
-    display: none;
-}
-.home-icon:hover .img-hover{
-    display: inline-block;
-}
-.chart-icon .img-hover{
-    display: none;
-}
-.chart-icon:hover .img-padrao{
-    display: none;
-}
-.chart-icon:hover .img-hover{
-    display: inline-block;
-}
-.about-icon .img-hover{
-    display: none;
-}
-.about-icon:hover .img-padrao{
-    display: none;
-}
-.about-icon:hover .img-hover{
-    display: inline-block;
-}
 .img-home-text button:hover{
     background-color: transparent;
     color: white;
@@ -244,7 +294,7 @@ body{
 }
 @media (max-width: 1250px){
     .equipe{
-        width: 50vw;
+        width: 60vw;
     }
 }
 @keyframes load {
