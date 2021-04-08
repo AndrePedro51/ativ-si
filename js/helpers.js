@@ -65,7 +65,7 @@ function filter(planilha) {
     let new_planilha = [];
     
     planilha.forEach(function (data) {
-        if (filtro_curso !== 'Selecione o Curso...') {
+        if (filtro_curso !== 'Todos os cursos') {
             if (data['1. Qual o seu curso?'] === filtro_curso) {
                 aux.push(data);
             }
@@ -75,7 +75,7 @@ function filter(planilha) {
     })
     
     aux.forEach(function (data) {
-        if (filtro_periodo !== 'Selecione o Período...') {
+        if (filtro_periodo !== 'Todos os períodos') {
             if (data['2. Qual o período que cursa?'] === filtro_periodo) {
                 new_planilha.push(data);
             }
