@@ -238,6 +238,8 @@
                         };
 
                         db.collection('planilhas').add({
+                            'nome': file.name,
+                            'data': new Date(),
                             'cursos': {
                                 'label': count(cursos)[0], 
                                 'data': count(cursos)[1]

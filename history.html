@@ -8,7 +8,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    
+    <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/de30b84de9.js" crossorigin="anonymous"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+    <script src="js/firebase.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <title>Sobre</title>
 </head>
 <body">
@@ -22,21 +33,39 @@
     </div>
     <div class="ultimas-pesquisas center">
         <h1>Últimas pesquisas</h1>
-        <table class="center">
+        <table class="center" id="history">
             <tr>
                 <th>Data</th>
                 <th>Arquivo</th>
-                <th>Pesquisar novamente</th>
+                <th>Ações</th>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>22/03/2021 22:35</td>
                 <td>Banco de dados.csv</td>
-                <td><a href="#">Pesquisar novamente</a></td>
-            </tr>
+                <td style="text-align: center;"><a href="results.html" name="" style="color: #041454"><i class="fas fa-eye fa-lg"></i></a></td>
+            </tr> -->
         </table>
     </div>
     
-    
+    <script>
+        const planilhas = db.collection('planilhas').get().then(res => {
+            res.docs.forEach(doc => {
+                const history = doc.data();
+
+                const data = `${history.data.toDate().toLocaleString().slice(0,10)} ${history.data.toDate().toLocaleTimeString()}`;
+            
+                $('#history').append(`<tr><td>${data}</td><td>${history.nome}</td><td style="text-align: center;"><a href="#" onclick="show(this.id)" id="${doc.id}" style="color: #041454"><i class="fas fa-eye fa-lg"></i></a></td></tr>`);
+            })
+        })
+
+        function show(id) {
+            console.log(`ID Doc: ${ id }`);
+
+            sessionStorage.setItem('id', JSON.stringify(id));
+
+            location.href = 'results.html';
+        }
+    </script>
     
 </body>
 </html>
