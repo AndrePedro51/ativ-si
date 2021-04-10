@@ -87,6 +87,16 @@ function filter(planilha) {
     return new_planilha;
 };
 
+function reduzirString(array, num) {
+    let newArray = [];
+
+    for (var i = 0; i < array.length; i++) {
+        newArray.push(array[i].slice(0, num) + '...')
+    }
+    
+    return newArray;
+}
+
 // let Excel = function () {
 //     this.validarExcel = function (file) {
 //         let reader = new FileReader();
