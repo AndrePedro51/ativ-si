@@ -48,13 +48,15 @@
     </div>
     
     <script>
-        const planilhas = db.collection('planilhas').get().then(res => {
+        const planilhas = db.collection('planilhas').orderBy('data', 'desc').get().then(res => {
+
             res.docs.forEach(doc => {
                 const history = doc.data();
 
                 const data = `${history.data.toDate().toLocaleString().slice(0,10)} ${history.data.toDate().toLocaleTimeString()}`;
             
                 $('#history').append(`<tr><td>${data}</td><td>${history.nome}</td><td style="text-align: center;"><a href="#" onclick="show(this.id)" id="${doc.id}" style="color: #041454"><i class="fas fa-eye fa-lg"></i></a></td></tr>`);
+                
             })
         })
 

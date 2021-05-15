@@ -66,15 +66,73 @@
             <input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" id="inputFile">
             <label for="inputFile">IMPORTAR ARQUIVO</label>
         </div>
+
         <div class="generate">
             <img src="img/icon-generate.png" alt=""><br>
             <a href=""><button id="submit">GERAR RESULTADOS</button></a>
         </div>
     </div>
-    
-    
 
     <script>
+        let Excel = function () {
+            this.parseExcel = function (file) {
+
+                let extensions = ['csv', 'xlsx'];
+
+                if (extensions.includes($('#inputFile').val().split('.').pop().toLowerCase(), 0) === false) {
+                    toastr.error(`Apenas os seguintes formatos são permitidos : ${ extensions.join(', ').toUpperCase()} `);
+                
+                    $('#inputFile').val('');
+                } else {
+                    let reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        let data = e.target.result;
+                        let workbook = XLSX.read(data, {
+                            type: 'binary'
+                        });
+
+                        workbook.SheetNames.forEach(function (sheetName) { validate: {
+                                let XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                                let json_object = JSON.stringify(XL_row_object);
+
+                                let planilha = JSON.parse(json_object);
+
+                                planilha = filter(planilha);
+
+                                let error = 'A planilha importada não corresponde a um Questionário Socioeconômico!';
+
+                                let success = 'Planilha Excel importada com sucesso!';
+
+                                if (typeof(planilha[0]) !== 'undefined') {
+                                    if (Object.keys(planilha[0])[2] === '1. Qual o seu curso?') {
+                                        
+                                        toastr.success(success);
+                                    } else {
+                                        $('#inputFile').val('');
+
+                                        toastr.error(error);
+                                        throw new Error(error);
+                                    }
+                                } else {
+                                    $('#inputFile').val('');
+
+                                    toastr.error(error);
+                                    throw new Error(error);
+                                }
+                            };
+                        })
+                    };
+
+                    reader.onerror = function (err) {
+                        console.log(err);
+                    };
+
+                    reader.readAsBinaryString(file);
+                }
+            }
+        }
+
         let ExcelToJSON = function () {
             this.parseExcel = function (file) {
                 let reader = new FileReader();
@@ -92,439 +150,433 @@
                         let planilha = JSON.parse(json_object);
 
                         planilha = filter(planilha);
+                     
+                        for (let i = 0; i < planilha.length; i++) {
+                            planilha_aux.push(planilha[i]);
+                            
+                            cursos.push(planilha[i]['1. Qual o seu curso?']);
 
-                        if (typeof(planilha[0]['1. Qual o seu curso?']) === 'undefined') {
-                            toastr.error('A planilha importada não corresponde a um Questionário Socioeconômico!')
+                            periodos.push(planilha[i]['2. Qual o período que cursa?']);
 
-                            $('#inputFile').val('');
-                        } else {
-                            for (let i = 0; i < planilha.length; i++) {
-                                planilha_aux.push(planilha[i]);
-                                
-                                cursos.push(planilha[i]['1. Qual o seu curso?']);
+                            estados.push(planilha[i]['4. Qual o estado do Brasil que você nasceu?']);
 
-                                periodos.push(planilha[i]['2. Qual o período que cursa?']);
+                            cidades.push(planilha[i]['5. Qual sua cidade de residência?']);
 
-                                estados.push(planilha[i]['4. Qual o estado do Brasil que você nasceu?']);
+                            generos.push(planilha[i]['6. Qual o seu gênero?']);
 
-                                cidades.push(planilha[i]['5. Qual sua cidade de residência?']);
+                            let nasc = planilha[i]['7. Qual a sua data de nascimento?'].split('/');
 
-                                generos.push(planilha[i]['6. Qual o seu gênero?']);
+                            idade = getIdade(nasc)
 
-                                let nasc = planilha[i]['7. Qual a sua data de nascimento?'].split('/');
+                            idades.push(idade);
 
-                                idade = getIdade(nasc)
+                            estado_civil.push(planilha[i]['8. Qual é o seu estado civil?']);
 
-                                idades.push(idade);
+                            necessidades.push(planilha[i]['9. Você é portador de alguma necessidade especial?(Pode selecionar mais de uma, se for o caso)'].split(','));
 
-                                estado_civil.push(planilha[i]['8. Qual é o seu estado civil?']);
+                            convive.push(planilha[i]['10. Você convive ou mora com alguma pessoa com deficiência?'].split(','));
 
-                                necessidades.push(planilha[i]['9. Você é portador de alguma necessidade especial?(Pode selecionar mais de uma, se for o caso)'].split(','));
+                            filhos.push(planilha[i]['11. Quantos filhos você tem?']);
 
-                                convive.push(planilha[i]['10. Você convive ou mora com alguma pessoa com deficiência?'].split(','));
+                            mora.push(planilha[i]['12. Com quem você mora atualmente?']);
 
-                                filhos.push(planilha[i]['11. Quantos filhos você tem?']);
+                            domicilio.push(planilha[i]['13. Quantas pessoas, incluindo você, moram no seu domicílio?']);
 
-                                mora.push(planilha[i]['12. Com quem você mora atualmente?']);
+                            situacao.push(planilha[i]['14. Qual a situação do domicílio onde mora?']);
 
-                                domicilio.push(planilha[i]['13. Quantas pessoas, incluindo você, moram no seu domicílio?']);
+                            tempo.push(planilha[i]['15. Tempo de moradia neste domicílio (Em anos)']);
 
-                                situacao.push(planilha[i]['14. Qual a situação do domicílio onde mora?']);
+                            renda.push(planilha[i]['16. Qual a faixa de renda mensal da sua família (em Salários Mínimos)']);
 
-                                tempo.push(planilha[i]['15. Tempo de moradia neste domicílio (Em anos)']);
+                            geladeiras.push(planilha[i]['17.1. Quantas geladeiras há em seu domicílio.']);
 
-                                renda.push(planilha[i]['16. Qual a faixa de renda mensal da sua família (em Salários Mínimos)']);
+                            telefones.push(planilha[i]['17.2. Quantos celulares comuns há em seu domicílio?']);
 
-                                geladeiras.push(planilha[i]['17.1. Quantas geladeiras há em seu domicílio.']);
+                            microondas.push(planilha[i]['17.3. Quantos micro-ondas há em seu domicílio?']);
 
-                                telefones.push(planilha[i]['17.2. Quantos celulares comuns há em seu domicílio?']);
+                            notebooks.push(planilha[i]['17.4. Quantos notebooks há em seu domicílio?']);
 
-                                microondas.push(planilha[i]['17.3. Quantos micro-ondas há em seu domicílio?']);
+                            lavar.push(planilha[i]['17.5. Quantas máquinas de lavar roupa e(ou) tanquinho há em seu domicílio?']);
 
-                                notebooks.push(planilha[i]['17.4. Quantos notebooks há em seu domicílio?']);
+                            motos.push(planilha[i]['17.6. Quantas motocicletas há em seu domicílio?']);
 
-                                lavar.push(planilha[i]['17.5. Quantas máquinas de lavar roupa e(ou) tanquinho há em seu domicílio?']);
+                            carros.push(planilha[i]['17.7. Quantos automóveis há em seu domicílio?']);
 
-                                motos.push(planilha[i]['17.6. Quantas motocicletas há em seu domicílio?']);
+                            dvds.push(planilha[i]['17.8. Quantos vídeos cassete e(ou) DVD players há em seu domicílio?']);
 
-                                carros.push(planilha[i]['17.7. Quantos automóveis há em seu domicílio?']);
+                            tvs.push(planilha[i]['17.9. Quantos televisores há em seu domicílio?']);
 
-                                dvds.push(planilha[i]['17.8. Quantos vídeos cassete e(ou) DVD players há em seu domicílio?']);
+                            celulares.push(planilha[i]['17.10. Quantos smartphones há em seu domicílio?']);
 
-                                tvs.push(planilha[i]['17.9. Quantos televisores há em seu domicílio?']);
+                            domicilio_tem.push(planilha[i]['18. No seu domicílio tem?']);
 
-                                celulares.push(planilha[i]['17.10. Quantos smartphones há em seu domicílio?']);
+                            trabalha.push(planilha[i]['19.1. Você trabalha?']);
 
-                                domicilio_tem.push(planilha[i]['18. No seu domicílio tem?']);
+                            vinculo.push(planilha[i]['19.2. Qual o seu vínculo com o emprego?']);
 
-                                trabalha.push(planilha[i]['19.1. Você trabalha?']);
+                            area.push(planilha[i]['19.3. Qual a área do seu trabalho?']);
 
-                                vinculo.push(planilha[i]['19.2. Qual o seu vínculo com o emprego?']);
+                            horario.push(planilha[i]['19.4. Qual seu horário de trabalho?']);
 
-                                area.push(planilha[i]['19.3. Qual a área do seu trabalho?']);
+                            plano_saude.push(planilha[i]['20. Você tem plano de saúde privado?']);
 
-                                horario.push(planilha[i]['19.4. Qual seu horário de trabalho?']);
+                            grau_pai.push(planilha[i]['21.1. Qual o grau de escolaridade do seu pai?']);
 
-                                plano_saude.push(planilha[i]['20. Você tem plano de saúde privado?']);
+                            grau_mae.push(planilha[i]['21.2. Qual o grau de escolaridade da sua mãe?']);
 
-                                grau_pai.push(planilha[i]['21.1. Qual o grau de escolaridade do seu pai?']);
+                            vida_escolar.push(planilha[i]['22. Na sua vida escolar você estudou']);
 
-                                grau_mae.push(planilha[i]['21.2. Qual o grau de escolaridade da sua mãe?']);
+                            freq_micro.push(planilha[i]['23.1. Com que frequência você utiliza microcomputadores?']);
 
-                                vida_escolar.push(planilha[i]['22. Na sua vida escolar você estudou']);
+                            onde_micro.push(planilha[i]['23.2. Onde você utiliza microcomputadores?']);
 
-                                freq_micro.push(planilha[i]['23.1. Com que frequência você utiliza microcomputadores?']);
+                            final_micro.push(planilha[i]['23.3. Com qual finalidade você utiliza microcomputadores?']);
 
-                                onde_micro.push(planilha[i]['23.2. Onde você utiliza microcomputadores?']);
+                            conhecimento_info.push(planilha[i]['24. Como você classifica seu conhecimento em informática']);
 
-                                final_micro.push(planilha[i]['23.3. Com qual finalidade você utiliza microcomputadores?']);
+                            conhecimento_windows.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Windows]']);
 
-                                conhecimento_info.push(planilha[i]['24. Como você classifica seu conhecimento em informática']);
+                            conhecimento_linux.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Linux]']);
 
-                                conhecimento_windows.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Windows]']);
+                            conhecimento_word.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Editores de textos (Word, Writer, etc.)]']);
 
-                                conhecimento_linux.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Linux]']);
+                            conhecimento_excel.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Planilhas eletrônicas (Excel, Calc, etc.)]']);
 
-                                conhecimento_word.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Editores de textos (Word, Writer, etc.)]']);
+                            conhecimento_powerp.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Apresentadores (Powerpoint, Impress, Prezzi, etc.)]']);
 
-                                conhecimento_excel.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Planilhas eletrônicas (Excel, Calc, etc.)]']);
+                            conhecimento_erp.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Sistemas de Gestão Empresaria]']);
 
-                                conhecimento_powerp.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Apresentadores (Powerpoint, Impress, Prezzi, etc.)]']);
+                            ingles.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Inglês]']);
 
-                                conhecimento_erp.push(planilha[i]['25. Qual o seu conhecimento em relação aos aplicativos a seguir? [Sistemas de Gestão Empresaria]']);
+                            espanhol.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Espanhol]']);
 
-                                ingles.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Inglês]']);
-
-                                espanhol.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Espanhol]']);
-
-                                outro_idioma.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Outro Idioma]']);
-
-                                televisores.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Televisores]']);
-
-                                internet.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Internet]']);
-
-                                revista.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Revistas]']);
-
-                                jornal.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Jornais]']);
-
-                                radio.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Rádio]']);
-
-                                redes_sociais.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Redes socias]']);
-
-                                conversas.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Conversas com Amigos]']);
-
-                                jornais.push(planilha[i]['28. Se você lê jornal, qual a frequência?']);
-
-                                assuntos.push(planilha[i]['29. Se você lê jornal, quais os assuntos que mais lê?']);
-
-                                livros.push(planilha[i]['30. Não considerando os livros escolares, quantos livros você lê por ano (em média)?']);
-
-                                generos_livros.push(planilha[i]['31. Se você lê livros literários, qual/quais o(s) gênero(s) preferido(s)?']);
-
-                                voluntarios.push(planilha[i]['32. Você dedica parte do seu tempo para atividades voluntárias?']);
-
-                                religioes.push(planilha[i]['33. Qual religião você professa?']);
-
-                                entretenimento.push(planilha[i]['34. Quais fontes de entretenimento cultural você usa?']);
-
-                                conheceu.push(planilha[i]['35. Estamos quase acabando... Como conheceu a FATEC Franca?']);
-
-                                escolheu.push(planilha[i]['36. Porque você escolheu este curso?']);
-
-                                expect_curso.push(planilha[i]['37. Qual sua maior expectativa quanto ao curso?']);
-
-                                expect_formar.push(planilha[i]['38. Qual sua expectativa após se formar?']);
-
-                                estudou.push(planilha[i]['39. Você já estudou nesta escola?']);
-
-                                tecnicos.push(planilha[i]['40. Você fez algum curso técnico?']);
-
-                                transporte.push(planilha[i]['41. Qual o meio de transporte você usa para vir à escola?']);
-                            };
-
-                            db.collection('planilhas').add({
-                                'nome': file.name,
-                                'data': new Date(),
-                                'cursos': {
-                                    'label': count(cursos)[0], 
-                                    'data': count(cursos)[1]
-                                },
-                                'periodos': {
-                                    'label': count(periodos)[0], 
-                                    'data': count(periodos)[1]
-                                },
-                                'estados': {
-                                    'label': count(estados)[0], 
-                                    'data': count(estados)[1]
-                                },
-                                'cidades': {
-                                    'label': count(cidades)[0], 
-                                    'data': count(cidades)[1]
-                                },
-                                'generos': {
-                                    'label': count(generos)[0], 
-                                    'data': count(generos)[1]
-                                },
-                                'idades': {
-                                    'label': count(idades)[0], 
-                                    'data': count(idades)[1]
-                                },
-                                'estado_civil': {
-                                    'label': count(estado_civil)[0], 
-                                    'data': count(estado_civil)[1]
-                                },
-                                'necessidades': {
-                                    'label': count(necessidades)[0], 
-                                    'data': count(necessidades)[1]
-                                },
-                                'convive': {
-                                    'label': count(convive)[0], 
-                                    'data': count(convive)[1]
-                                },
-                                'filhos': {
-                                    'label': count(filhos)[0], 
-                                    'data': count(filhos)[1]
-                                },
-                                'mora': {
-                                    'label': count(mora)[0], 
-                                    'data': count(mora)[1]
-                                },
-                                'domicilio': {
-                                    'label': count(domicilio)[0], 
-                                    'data': count(domicilio)[1]
-                                },
-                                'situacao': {
-                                    'label': count(situacao)[0], 
-                                    'data': count(situacao)[1]
-                                },
-                                'tempo': {
-                                    'label': count(tempo)[0], 
-                                    'data': count(tempo)[1]
-                                },
-                                'renda': {
-                                    'label': count(renda)[0], 
-                                    'data': count(renda)[1]
-                                },
-                                'geladeiras': {
-                                    'label': count(geladeiras)[0], 
-                                    'data': count(geladeiras)[1]
-                                },
-                                'telefones': {
-                                    'label': count(telefones)[0], 
-                                    'data': count(telefones)[1]
-                                },
-                                'microondas': {
-                                    'label': count(microondas)[0], 
-                                    'data': count(microondas)[1]
-                                },
-                                'notebooks': {
-                                    'label': count(notebooks)[0], 
-                                    'data': count(notebooks)[1]
-                                },
-                                'lavar': {
-                                    'label': count(lavar)[0], 
-                                    'data': count(lavar)[1]
-                                },
-                                'motos': {
-                                    'label': count(motos)[0], 
-                                    'data': count(motos)[1]
-                                },
-                                'carros': {
-                                    'label': count(carros)[0], 
-                                    'data': count(carros)[1]
-                                },
-                                'dvds': {
-                                    'label': count(dvds)[0], 
-                                    'data': count(dvds)[1]
-                                },
-                                'tvs': {
-                                    'label': count(tvs)[0], 
-                                    'data': count(tvs)[1]
-                                },
-                                'celulares': {
-                                    'label': count(celulares)[0], 
-                                    'data': count(celulares)[1]
-                                },
-                                'domicilio_tem': {
-                                    'label': count(domicilio_tem)[0], 
-                                    'data': count(domicilio_tem)[1]
-                                },
-                                'trabalha': {
-                                    'label': count(trabalha)[0], 
-                                    'data': count(trabalha)[1]
-                                },
-                                'vinculo': {
-                                    'label': count(vinculo)[0], 
-                                    'data': count(vinculo)[1]
-                                },
-                                'area': {
-                                    'label': count(area)[0], 
-                                    'data': count(area)[1]
-                                },
-                                'horario': {
-                                    'label': count(horario)[0], 
-                                    'data': count(horario)[1]
-                                },
-                                'plano_saude': {
-                                    'label': count(plano_saude)[0], 
-                                    'data': count(plano_saude)[1]
-                                },
-                                'grau_pai': {
-                                    'label': count(grau_pai)[0], 
-                                    'data': count(grau_pai)[1]
-                                },
-                                'grau_mae': {
-                                    'label': count(grau_mae)[0], 
-                                    'data': count(grau_mae)[1]
-                                },
-                                'vida_escolar': {
-                                    'label': count(vida_escolar)[0], 
-                                    'data': count(vida_escolar)[1]
-                                },
-                                'freq_micro': {
-                                    'label': count(freq_micro)[0], 
-                                    'data': count(freq_micro)[1]
-                                },
-                                'onde_micro': {
-                                    'label': count(onde_micro)[0], 
-                                    'data': count(onde_micro)[1]
-                                },
-                                'final_micro': {
-                                    'label': count(final_micro)[0], 
-                                    'data': count(final_micro)[1]
-                                },
-                                'conhecimento_info': {
-                                    'label': count(conhecimento_info)[0], 
-                                    'data': count(conhecimento_info)[1]
-                                },
-                                'conhecimento_windows': {
-                                    'label': count(conhecimento_windows)[0], 
-                                    'data': count(conhecimento_windows)[1]
-                                },
-                                'conhecimento_linux': {
-                                    'label': count(conhecimento_linux)[0], 
-                                    'data': count(conhecimento_linux)[1]
-                                },
-                                'conhecimento_word': {
-                                    'label': count(conhecimento_word)[0], 
-                                    'data': count(conhecimento_word)[1]
-                                },
-                                'conhecimento_excel': {
-                                    'label': count(conhecimento_excel)[0], 
-                                    'data': count(conhecimento_excel)[1]
-                                },
-                                'conhecimento_powerp': {
-                                    'label': count(conhecimento_powerp)[0], 
-                                    'data': count(conhecimento_powerp)[1]
-                                },
-                                'conhecimento_erp': {
-                                    'label': count(conhecimento_erp)[0], 
-                                    'data': count(conhecimento_erp)[1]
-                                },
-                                'ingles': {
-                                    'label': count(ingles)[0], 
-                                    'data': count(ingles)[1]
-                                },
-                                'espanhol': {
-                                    'label': count(espanhol)[0], 
-                                    'data': count(espanhol)[1]
-                                },
-                                'outro_idioma': {
-                                    'label': count(outro_idioma)[0], 
-                                    'data': count(outro_idioma)[1]
-                                },
-                                'televisores': {
-                                    'label': count(televisores)[0], 
-                                    'data': count(televisores)[1]
-                                },
-                                'internet': {
-                                    'label': count(internet)[0], 
-                                    'data': count(internet)[1]
-                                },
-                                'revista': {
-                                    'label': count(revista)[0], 
-                                    'data': count(revista)[1]
-                                },
-                                'jornal': {
-                                    'label': count(jornal)[0], 
-                                    'data': count(jornal)[1]
-                                },
-                                'radio': {
-                                    'label': count(radio)[0], 
-                                    'data': count(radio)[1]
-                                },
-                                'redes_sociais': {
-                                    'label': count(redes_sociais)[0], 
-                                    'data': count(redes_sociais)[1]
-                                },
-                                'conversas': {
-                                    'label': count(conversas)[0], 
-                                    'data': count(conversas)[1]
-                                },
-                                'jornais': {
-                                    'label': count(jornais)[0], 
-                                    'data': count(jornais)[1]
-                                },
-                                'assuntos': {
-                                    'label': count(assuntos)[0], 
-                                    'data': count(assuntos)[1]
-                                },
-                                'livros': {
-                                    'label': count(livros)[0], 
-                                    'data': count(livros)[1]
-                                },
-                                'generos_livros': {
-                                    'label': count(generos_livros)[0], 
-                                    'data': count(generos_livros)[1]
-                                },
-                                'voluntarios': {
-                                    'label': count(voluntarios)[0], 
-                                    'data': count(voluntarios)[1]
-                                },
-                                'religioes': {
-                                    'label': count(religioes)[0], 
-                                    'data': count(religioes)[1]
-                                },
-                                'entretenimento': {
-                                    'label': count(entretenimento)[0], 
-                                    'data': count(entretenimento)[1]
-                                },
-                                'conheceu': {
-                                    'label': count(conheceu)[0], 
-                                    'data': count(conheceu)[1]
-                                },
-                                'escolheu': {
-                                    'label': count(escolheu)[0], 
-                                    'data': count(escolheu)[1]
-                                },
-                                'expect_curso': {
-                                    'label': count(expect_curso)[0], 
-                                    'data': count(expect_curso)[1]
-                                },
-                                'expect_formar': {
-                                    'label': count(expect_formar)[0], 
-                                    'data': count(expect_formar)[1]
-                                },
-                                'estudou': {
-                                    'label': count(estudou)[0], 
-                                    'data': count(estudou)[1]
-                                },
-                                'tecnicos': {
-                                    'label': count(tecnicos)[0], 
-                                    'data': count(tecnicos)[1]
-                                },
-                                'transporte': {
-                                    'label': count(transporte)[0], 
-                                    'data': count(transporte)[1]
-                                }
-                            }).then(function(res) {
-                                console.log(`Salvou! ID Doc: ${ res.id }`);
-
-                                sessionStorage.setItem('id', JSON.stringify(res.id));
-
-                                location.href = 'results.html';
-                            }).catch(err => (toastr.error(`Ocorreu um erro: ${ err }`)));
+                            outro_idioma.push(planilha[i]['26. Agora, considere seu conhecimento sobre idiomas [Outro Idioma]']);
+
+                            televisores.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Televisores]']);
+
+                            internet.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Internet]']);
+
+                            revista.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Revistas]']);
+
+                            jornal.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Jornais]']);
+
+                            radio.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Rádio]']);
+
+                            redes_sociais.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Redes socias]']);
+
+                            conversas.push(planilha[i]['27. Considere a busca por informação nos seguintes meios de comunicação [Conversas com Amigos]']);
+
+                            jornais.push(planilha[i]['28. Se você lê jornal, qual a frequência?']);
+
+                            assuntos.push(planilha[i]['29. Se você lê jornal, quais os assuntos que mais lê?']);
+
+                            livros.push(planilha[i]['30. Não considerando os livros escolares, quantos livros você lê por ano (em média)?']);
+
+                            generos_livros.push(planilha[i]['31. Se você lê livros literários, qual/quais o(s) gênero(s) preferido(s)?']);
+
+                            voluntarios.push(planilha[i]['32. Você dedica parte do seu tempo para atividades voluntárias?']);
+
+                            religioes.push(planilha[i]['33. Qual religião você professa?']);
+
+                            entretenimento.push(planilha[i]['34. Quais fontes de entretenimento cultural você usa?']);
+
+                            conheceu.push(planilha[i]['35. Estamos quase acabando... Como conheceu a FATEC Franca?']);
+
+                            escolheu.push(planilha[i]['36. Porque você escolheu este curso?']);
+
+                            expect_curso.push(planilha[i]['37. Qual sua maior expectativa quanto ao curso?']);
+
+                            expect_formar.push(planilha[i]['38. Qual sua expectativa após se formar?']);
+
+                            estudou.push(planilha[i]['39. Você já estudou nesta escola?']);
+
+                            tecnicos.push(planilha[i]['40. Você fez algum curso técnico?']);
+
+                            transporte.push(planilha[i]['41. Qual o meio de transporte você usa para vir à escola?']);
                         };
+
+                        db.collection('planilhas').add({
+                            'nome': file.name,
+                            'data': new Date(),
+                            'cursos': {
+                                'label': count(cursos)[0], 
+                                'data': count(cursos)[1]
+                            },
+                            'periodos': {
+                                'label': count(periodos)[0], 
+                                'data': count(periodos)[1]
+                            },
+                            'estados': {
+                                'label': count(estados)[0], 
+                                'data': count(estados)[1]
+                            },
+                            'cidades': {
+                                'label': count(cidades)[0], 
+                                'data': count(cidades)[1]
+                            },
+                            'generos': {
+                                'label': count(generos)[0], 
+                                'data': count(generos)[1]
+                            },
+                            'idades': {
+                                'label': count(idades)[0], 
+                                'data': count(idades)[1]
+                            },
+                            'estado_civil': {
+                                'label': count(estado_civil)[0], 
+                                'data': count(estado_civil)[1]
+                            },
+                            'necessidades': {
+                                'label': count(necessidades)[0], 
+                                'data': count(necessidades)[1]
+                            },
+                            'convive': {
+                                'label': count(convive)[0], 
+                                'data': count(convive)[1]
+                            },
+                            'filhos': {
+                                'label': count(filhos)[0], 
+                                'data': count(filhos)[1]
+                            },
+                            'mora': {
+                                'label': count(mora)[0], 
+                                'data': count(mora)[1]
+                            },
+                            'domicilio': {
+                                'label': count(domicilio)[0], 
+                                'data': count(domicilio)[1]
+                            },
+                            'situacao': {
+                                'label': count(situacao)[0], 
+                                'data': count(situacao)[1]
+                            },
+                            'tempo': {
+                                'label': count(tempo)[0], 
+                                'data': count(tempo)[1]
+                            },
+                            'renda': {
+                                'label': count(renda)[0], 
+                                'data': count(renda)[1]
+                            },
+                            'geladeiras': {
+                                'label': count(geladeiras)[0], 
+                                'data': count(geladeiras)[1]
+                            },
+                            'telefones': {
+                                'label': count(telefones)[0], 
+                                'data': count(telefones)[1]
+                            },
+                            'microondas': {
+                                'label': count(microondas)[0], 
+                                'data': count(microondas)[1]
+                            },
+                            'notebooks': {
+                                'label': count(notebooks)[0], 
+                                'data': count(notebooks)[1]
+                            },
+                            'lavar': {
+                                'label': count(lavar)[0], 
+                                'data': count(lavar)[1]
+                            },
+                            'motos': {
+                                'label': count(motos)[0], 
+                                'data': count(motos)[1]
+                            },
+                            'carros': {
+                                'label': count(carros)[0], 
+                                'data': count(carros)[1]
+                            },
+                            'dvds': {
+                                'label': count(dvds)[0], 
+                                'data': count(dvds)[1]
+                            },
+                            'tvs': {
+                                'label': count(tvs)[0], 
+                                'data': count(tvs)[1]
+                            },
+                            'celulares': {
+                                'label': count(celulares)[0], 
+                                'data': count(celulares)[1]
+                            },
+                            'domicilio_tem': {
+                                'label': count(domicilio_tem)[0], 
+                                'data': count(domicilio_tem)[1]
+                            },
+                            'trabalha': {
+                                'label': count(trabalha)[0], 
+                                'data': count(trabalha)[1]
+                            },
+                            'vinculo': {
+                                'label': count(vinculo)[0], 
+                                'data': count(vinculo)[1]
+                            },
+                            'area': {
+                                'label': count(area)[0], 
+                                'data': count(area)[1]
+                            },
+                            'horario': {
+                                'label': count(horario)[0], 
+                                'data': count(horario)[1]
+                            },
+                            'plano_saude': {
+                                'label': count(plano_saude)[0], 
+                                'data': count(plano_saude)[1]
+                            },
+                            'grau_pai': {
+                                'label': count(grau_pai)[0], 
+                                'data': count(grau_pai)[1]
+                            },
+                            'grau_mae': {
+                                'label': count(grau_mae)[0], 
+                                'data': count(grau_mae)[1]
+                            },
+                            'vida_escolar': {
+                                'label': count(vida_escolar)[0], 
+                                'data': count(vida_escolar)[1]
+                            },
+                            'freq_micro': {
+                                'label': count(freq_micro)[0], 
+                                'data': count(freq_micro)[1]
+                            },
+                            'onde_micro': {
+                                'label': count(onde_micro)[0], 
+                                'data': count(onde_micro)[1]
+                            },
+                            'final_micro': {
+                                'label': count(final_micro)[0], 
+                                'data': count(final_micro)[1]
+                            },
+                            'conhecimento_info': {
+                                'label': count(conhecimento_info)[0], 
+                                'data': count(conhecimento_info)[1]
+                            },
+                            'conhecimento_windows': {
+                                'label': count(conhecimento_windows)[0], 
+                                'data': count(conhecimento_windows)[1]
+                            },
+                            'conhecimento_linux': {
+                                'label': count(conhecimento_linux)[0], 
+                                'data': count(conhecimento_linux)[1]
+                            },
+                            'conhecimento_word': {
+                                'label': count(conhecimento_word)[0], 
+                                'data': count(conhecimento_word)[1]
+                            },
+                            'conhecimento_excel': {
+                                'label': count(conhecimento_excel)[0], 
+                                'data': count(conhecimento_excel)[1]
+                            },
+                            'conhecimento_powerp': {
+                                'label': count(conhecimento_powerp)[0], 
+                                'data': count(conhecimento_powerp)[1]
+                            },
+                            'conhecimento_erp': {
+                                'label': count(conhecimento_erp)[0], 
+                                'data': count(conhecimento_erp)[1]
+                            },
+                            'ingles': {
+                                'label': count(ingles)[0], 
+                                'data': count(ingles)[1]
+                            },
+                            'espanhol': {
+                                'label': count(espanhol)[0], 
+                                'data': count(espanhol)[1]
+                            },
+                            'outro_idioma': {
+                                'label': count(outro_idioma)[0], 
+                                'data': count(outro_idioma)[1]
+                            },
+                            'televisores': {
+                                'label': count(televisores)[0], 
+                                'data': count(televisores)[1]
+                            },
+                            'internet': {
+                                'label': count(internet)[0], 
+                                'data': count(internet)[1]
+                            },
+                            'revista': {
+                                'label': count(revista)[0], 
+                                'data': count(revista)[1]
+                            },
+                            'jornal': {
+                                'label': count(jornal)[0], 
+                                'data': count(jornal)[1]
+                            },
+                            'radio': {
+                                'label': count(radio)[0], 
+                                'data': count(radio)[1]
+                            },
+                            'redes_sociais': {
+                                'label': count(redes_sociais)[0], 
+                                'data': count(redes_sociais)[1]
+                            },
+                            'conversas': {
+                                'label': count(conversas)[0], 
+                                'data': count(conversas)[1]
+                            },
+                            'jornais': {
+                                'label': count(jornais)[0], 
+                                'data': count(jornais)[1]
+                            },
+                            'assuntos': {
+                                'label': count(assuntos)[0], 
+                                'data': count(assuntos)[1]
+                            },
+                            'livros': {
+                                'label': count(livros)[0], 
+                                'data': count(livros)[1]
+                            },
+                            'generos_livros': {
+                                'label': count(generos_livros)[0], 
+                                'data': count(generos_livros)[1]
+                            },
+                            'voluntarios': {
+                                'label': count(voluntarios)[0], 
+                                'data': count(voluntarios)[1]
+                            },
+                            'religioes': {
+                                'label': count(religioes)[0], 
+                                'data': count(religioes)[1]
+                            },
+                            'entretenimento': {
+                                'label': count(entretenimento)[0], 
+                                'data': count(entretenimento)[1]
+                            },
+                            'conheceu': {
+                                'label': count(conheceu)[0], 
+                                'data': count(conheceu)[1]
+                            },
+                            'escolheu': {
+                                'label': count(escolheu)[0], 
+                                'data': count(escolheu)[1]
+                            },
+                            'expect_curso': {
+                                'label': count(expect_curso)[0], 
+                                'data': count(expect_curso)[1]
+                            },
+                            'expect_formar': {
+                                'label': count(expect_formar)[0], 
+                                'data': count(expect_formar)[1]
+                            },
+                            'estudou': {
+                                'label': count(estudou)[0], 
+                                'data': count(estudou)[1]
+                            },
+                            'tecnicos': {
+                                'label': count(tecnicos)[0], 
+                                'data': count(tecnicos)[1]
+                            },
+                            'transporte': {
+                                'label': count(transporte)[0], 
+                                'data': count(transporte)[1]
+                            }
+                        }).then(function(res) {
+                            console.log(`Salvou! ID Doc: ${ res.id }`);
+
+                            sessionStorage.setItem('id', JSON.stringify(res.id));
+
+                            location.href = 'results.html';
+                        }).catch(err => (toastr.error(`Ocorreu um erro: ${ err }`)));
                     });
                 };
 
@@ -540,16 +592,12 @@
 
         $('#inputFile').change(function(event) {
             change = event;
-            
-            let extensions = ['csv', 'xlsx'];
 
-            if ($.inArray($(this).val().split('.').pop().toLowerCase(), extensions) == -1) {
-                toastr.error(`Apenas os seguintes formatos são permitidos : ${ extensions.join(', ').toUpperCase()} `);
-                
-                $('#inputFile').val('');
-            } else {
-                toastr.success('Planilha Excel importada com sucesso!');
-            }
+            let excel = change.target.files; // FileList object
+
+            let excel_json = new Excel();
+
+            let response = excel_json.parseExcel(excel[0]);
         })
 
         $('#submit').click(function (e) {
